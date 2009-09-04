@@ -17,7 +17,15 @@
  * the License.
  *)
 
-class c :
+(**
+ * An opaque handle to a native JavaScript object. A
+ * <code>JavaScriptObject</code> cannot be created directly.
+ * <code>JavaScriptObject</code> should be declared as the return type of a
+ * JSNI method that returns native (non-Java) objects. A
+ * <code>JavaScriptObject</code> passed back into JSNI from Java becomes the
+ * original object, and can be accessed in JavaScript as expected.
+ *)
+class type c =
 object
 end
 
