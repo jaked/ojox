@@ -141,7 +141,7 @@ object
    * @param oldChild The node being replaced in the list
    * @return The node replaced
    *)
-  method replaceChild : c-> c -> c
+  method replaceChild : c -> c -> c
 
   (**
    * The value of this node, depending on its type; see the table above. When it
@@ -151,3 +151,31 @@ object
 
   constraint 'a = #c
 end
+
+(**
+ * The node is an {@link Element}.
+ *)
+val eLEMENT_NODE : int
+
+(**
+ * The node is a {@link Text} node.
+ *)
+val tEXT_NODE : int
+
+(**
+ * The node is a {@link Document}.
+ *)
+val dOCUMENT_NODE : int
+
+(**
+ * Assert that the given {@link JavaScriptObject} is a DOM node and
+ * automatically typecast it.
+ *)
+val as_ : JavaScriptObject.c -> c
+
+(**
+ * Determines whether the given {@link JavaScriptObject} is a DOM node. A
+ * <code>null</code> object will cause this method to return
+ * <code>false</code>.
+ *)
+val is : JavaScriptObject.c -> bool
