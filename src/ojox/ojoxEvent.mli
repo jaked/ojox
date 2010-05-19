@@ -18,75 +18,74 @@
  *)
 
 (**
- * Type class used to register events with the {@link HandlerManager}.
- * <p>
- * Type is parameterized by the handler type in order to make the addHandler
- * method type safe.
- * </p>
- *
- * @param <H> handler type
+   Type class used to register events with the {!HandlerManager}.
+   <p>
+   Type is parameterized by the handler type in order to make the addHandler
+   method type safe.
+   </p>
+  
+   @param 'a handler type
  *)
 class ['a] tag :
 object
 end
 
 (**
- * Root of all GWT events. All GWT events are considered dead and should no
- * longer be accessed once the {@link HandlerManager} which originally fired the
- * event finishes with it. That is, don't hold on to event objects outside of
- * your handler methods.
- *
- * @param <H> handler type
- *
+   Root of all GWT events. All GWT events are considered dead and should no
+   longer be accessed once the {!HandlerManager} which originally fired the
+   event finishes with it. That is, don't hold on to event objects outside of
+   your handler methods.
+  
+   @param 'a handler type
 *)
 class virtual ['a] c :
 object
 
   (**
-   * Returns the type used to register this event. Used by handler manager to
-   * dispatch events to the correct handlers.
-   *
-   * @return the type
+     Returns the type used to register this event. Used by handler manager to
+     dispatch events to the correct handlers.
+    
+     @return the type
    *)
   method virtual getAssociatedType : 'a tag
 
   (**
-   * Returns the source that last fired this event.
-   *
-   * @return object representing the source of this event
+     Returns the source that last fired this event.
+    
+     @return object representing the source of this event
    *)
   method getSource : < >
 
   (**
-   * Asserts that the event still should be accessed. All events are considered
-   * to be "dead" after their original handler manager finishes firing them. An
-   * event can be revived by calling {@link GwtEvent#revive()}.
+     Asserts that the event still should be accessed. All events are considered
+     to be "dead" after their original handler manager finishes firing them. An
+     event can be revived by calling {!GwtEvent#revive()}.
    *)
   method assertLive : unit
 
   (**
-   * Is the event current live?
-   * 
-   * @return whether the event is live
+     Is the event current live?
+     
+     @return whether the event is live
    *)
   method isLive : bool
 
   (**
-   * Kill the event. After the event has been killed, users cannot really on its
-   * values or functions being available.
+     Kill the event. After the event has been killed, users cannot really on its
+     values or functions being available.
    *)
   method kill : unit
 
   (**
-   * Revives the event. Used when recycling event instances.
+     Revives the event. Used when recycling event instances.
    *)
   method revive : unit
 
   (**
-   * Set the source that triggered this event.
-   *
-   * @param source the source of this event, should only be set by a
-   *          {@link HandlerManager}
+     Set the source that triggered this event.
+    
+     @param source the source of this event, should only be set by a
+              {!HandlerManager}
    *)
   method setSource : < > -> unit
 end

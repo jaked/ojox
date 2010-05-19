@@ -18,60 +18,63 @@
  *)
 
 (**
- * An opaque handle to a native JavaScript object. A
- * <code>JavaScriptObject</code> cannot be created directly.
- * <code>JavaScriptObject</code> should be declared as the return type of a
- * JSNI method that returns native (non-Java) objects. A
- * <code>JavaScriptObject</code> passed back into JSNI from Java becomes the
- * original object, and can be accessed in JavaScript as expected.
- *)
+   An opaque handle to a native JavaScript object. A
+   [JavaScriptObject] cannot be created directly.  [JavaScriptObject]
+   should be declared as the return type of a JSNI method that returns
+   native (non-Java) objects. A [JavaScriptObject] passed back into
+   JSNI from Java becomes the original object, and can be accessed in
+   JavaScript as expected.
+*)
+
 class type c =
 object
 end
 
 (**
- * Returns a new array.
- *)
+   Returns a new array.
+*)
 val createArray : unit -> c
 
 (**
- * Returns an empty function.
+   Returns an empty function.
  *)
 val createFunction : unit -> c
 
 (**
- * Returns a new object.
+   Returns a new object.
  *)
 val createObject : unit -> c
 
 (**
- * A helper method to enable cross-casting from any {@link JavaScriptObject}
- * type to any other {@link JavaScriptObject} type.
- * 
- * @param <T> the target type
- * @return this object as a different type
+   A helper method to enable cross-casting from any {!JavaScriptObject}
+   type to any other {!JavaScriptObject} type.
+ 
+   @param 'a the original type of the object
+   @param 'b the cast type of the object
+   @param obj the object as 'a
+   @return the object as 'b
  *)
-val cast : #c -> #c
+val cast : (#c as 'a) -> (#c as 'b)
 
 (**
- * Returns <code>true</code> if the objects are JavaScript identical
- * (triple-equals).
+   Returns [true] if the objects are JavaScript identical
+   (triple-equals).
  *)
 val equals : #c -> #c -> bool
 
 (**
- * Uses a monotonically increasing counter to assign a hash code to the
- * underlying JavaScript object. Do not call this method on non-modifiable
- * JavaScript objects.
- * 
- * TODO: if the underlying object defines a 'hashCode' method maybe use that?
- * 
- * @return the hash code of the object
+   Uses a monotonically increasing counter to assign a hash code to the
+   underlying JavaScript object. Do not call this method on non-modifiable
+   JavaScript objects.
+   
+   TODO: if the underlying object defines a 'hashCode' method maybe use that?
+   
+   @return the hash code of the object
  *)
 val hashCode : #c -> int
 
 (**
- * Returns the results of calling <code>toString</code> in JavaScript on the
- * object, if the object implements toString; otherwise returns "[JavaScriptObject]".
+   Returns the results of calling [toString]> in JavaScript on the
+   object, if the object implements toString; otherwise returns "[JavaScriptObject]".
  *)
 val toString : #c -> string
