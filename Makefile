@@ -1,11 +1,13 @@
 PKGLIST=ojox
 
 all:
+	mkdir -p stage
 	for pkg in $(PKGLIST); do \
 		$(MAKE) -C src/$$pkg all || exit; \
 	done
 
 doc:
+	mkdir -p doc
 	for pkg in $(PKGLIST); do \
 		$(MAKE) -C src/$$pkg doc || exit; \
 	done
@@ -27,8 +29,8 @@ clean:
 	done
 	make -C test clean
 	make -C examples clean
-	rm -rf doc/*
-	rm -rf stage/*
+	rm -rf doc
+	rm -rf stage
 
 test:
 	make -C test
