@@ -17,6 +17,16 @@
  * the License.
  *)
 
+(**
+   Provides programmatic access to properties of the style object.
+   
+   Note that if a property or value is not explicitly enumerated in this
+   class, you can still access it via {!#getProperty(String)},
+   and {!setProperty(String, String)}.
+   
+   See {!Element.getStyle()}
+*)
+
 class type c =
 object
   inherit JavaScriptObject.c

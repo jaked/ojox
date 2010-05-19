@@ -25,9 +25,7 @@ object
      The class attribute of the element. This attribute has been renamed due to
      conflicts with the "class" keyword exposed by many languages.
      
-     @see <a
-          href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class">W3C
-          HTML Specification</a>
+     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class> W3C HTML Specification
    *)
   method _get_className : string
 
@@ -67,9 +65,7 @@ object
   (**
      The element's identifier.
      
-     @see <a
-          href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id">W3C
-          HTML Specification</a>
+     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id> W3C HTML Specification
    *)
   method _get_id : string
 
@@ -117,9 +113,7 @@ object
      The class attribute of the element. This attribute has been renamed due to
      conflicts with the "class" keyword exposed by many languages.
      
-     @see <a
-          href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class">W3C
-          HTML Specification</a>
+     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class> W3C HTML Specification
    *)
   method _set_className : string -> unit
 
@@ -132,9 +126,7 @@ object
   (**
      The element's identifier.
      
-     @see <a
-          href="http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id">W3C
-          HTML Specification</a>
+     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id> W3C HTML Specification
    *)
   method _set_id : string -> unit
 

@@ -17,6 +17,13 @@
  * the License.
  *)
 
+(**
+   The Node interface is the primary datatype for the entire Document Object
+   Model. It represents a single node in the document tree. While all objects
+   implementing the Node interface expose methods for dealing with children, not
+   all objects implementing the Node interface may have children.
+*)
+
 class type c =
 object
   inherit JavaScriptObject.c
@@ -88,12 +95,13 @@ object
    *)
   method _get_nodeValue : string
 
+  (*
   (**
      The Document object associated with this node. This is also the
      {!Document} object used to create new nodes.
    *)
   (* method _get_ownerDocument : Document *)
-  (* Document and Node can't refer to one another *)
+  Document and Node can't refer to one another *)
 
   (**
      The parent of this node. All nodes except Document may have a parent.
