@@ -5,3 +5,5 @@ myocamlbuild.ml
 stage
 doc
 *.byte
+*~
+.#*
