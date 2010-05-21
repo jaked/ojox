@@ -1,0 +1,2 @@
+<*.ml*> : pkg_oUnit, pkg_ojox
+<*.js> : pkg_ounit-js, pkg_ojox
