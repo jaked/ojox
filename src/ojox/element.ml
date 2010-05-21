@@ -19,47 +19,21 @@
 
 open Ocamljs.Inline
 
-class type c =
-object
-  inherit Node.c
-
-  method blur : unit
-  method focus : unit
-  method _get_className : string
-  method _get_clientHeight : string
-  method _get_clientWidth : string
-  method _get_dir : string
-  method getElementsByTagName : string -> c array
-  method _get_id : string
-  method _get_lang : string
-  method _get_offsetParent : c
-  method _get_style : Style.c
-  method _get_tabIndex : int
-  method _get_title : string
-  method removeAttribute : string -> unit
-  method setAttribute : string -> string -> unit
-  method _set_className : string -> unit
-  method _set_dir : string -> unit
-  method _set_id : string -> unit
-  method _set_lang : string -> unit
-  method _set_scrollTop : string -> unit
-end
-
 let is_node o =
   not (Ocamljs.is_null o) && o#_get_nodeType = Node.eLEMENT_NODE
 
 let is_javaScriptObject o =
   if Node.is o
-  then is_node (Obj.magic o : Node.c)
+  then is_node (Obj.magic o : DOMTypes.node)
   else false
 
 let as_javaScriptObject o =
   assert (is_javaScriptObject o);
-  (Obj.magic o : c)
+  (Obj.magic o : DOMTypes.element)
 
 let as_node o =
   assert (is_node o);
-  (Obj.magic o : c)
+  (Obj.magic o : DOMTypes.element)
 
 let addClassName e className =
   let className = JavaString.trim className in

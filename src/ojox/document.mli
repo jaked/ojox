@@ -17,17 +17,13 @@
  * the License.
  *)
 
+open DOMTypes
+
 (**
    A Document is the root of the HTML hierarchy and holds the entire content.
    Besides providing access to the hierarchy, it also provides some convenience
    methods for accessing certain sets of information from the document.
 *)
-
-class type c =
-object
-  inherit Node.c
-
-end
 
 (**
    Gets the default document. This is the document in which the module is
@@ -35,4 +31,4 @@ end
    
    @return the default document
  *)
-val get : unit -> c
+val get : unit -> document

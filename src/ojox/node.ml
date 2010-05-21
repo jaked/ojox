@@ -19,30 +19,6 @@
 
 open Ocamljs.Inline
 
-class type c =
-object
-  inherit JavaScriptObject.c
-
-  method appendChild : 'a.'a -> 'a
-  method cloneNode : bool -> c
-  method _get_childNodes : c array
-  method _get_firstChild : c
-  method _get_lastChild : c
-  method _get_nextSibling : c
-  method _get_nodeName : string
-  method _get_nodeType : int
-  method _get_nodeValue : string
-  method _get_parentNode : c
-  method _get_previousSibling : c
-  method _get_hasChildNodes : bool
-  method insertBefore : c -> c -> c
-  method removeChild : c -> c
-  method replaceChild : c -> c -> c
-  method _set_nodeValue : string -> unit
-
-  constraint 'a = #c
-end
-
 let eLEMENT_NODE = 1
 let tEXT_NODE = 3
 let dOCUMENT_NODE = 9
@@ -51,4 +27,4 @@ let is o = << (!!$o$) && (!!$o$.nodeType) >>
 
 let as_ o =
   assert (is o);
-  (Obj.magic o : c)
+  (Obj.magic o : DOMTypes.node)

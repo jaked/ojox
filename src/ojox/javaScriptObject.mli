@@ -17,6 +17,8 @@
  * the License.
  *)
 
+open DOMTypes
+
 (**
    An opaque handle to a native JavaScript object. A
    [JavaScriptObject] cannot be created directly.  [JavaScriptObject]
@@ -26,24 +28,20 @@
    JavaScript as expected.
 *)
 
-class type c =
-object
-end
-
 (**
    Returns a new array.
 *)
-val createArray : unit -> c
+val createArray : unit -> javaScriptObject
 
 (**
    Returns an empty function.
  *)
-val createFunction : unit -> c
+val createFunction : unit -> javaScriptObject
 
 (**
    Returns a new object.
  *)
-val createObject : unit -> c
+val createObject : unit -> javaScriptObject
 
 (**
    A helper method to enable cross-casting from any {!JavaScriptObject}
@@ -54,13 +52,13 @@ val createObject : unit -> c
    @param obj the object as 'a
    @return the object as 'b
  *)
-val cast : (#c as 'a) -> (#c as 'b)
+val cast : (#javaScriptObject as 'a) -> (#javaScriptObject as 'b)
 
 (**
    Returns [true] if the objects are JavaScript identical
    (triple-equals).
  *)
-val equals : #c -> #c -> bool
+val equals : #javaScriptObject -> #javaScriptObject -> bool
 
 (**
    Uses a monotonically increasing counter to assign a hash code to the
@@ -71,10 +69,10 @@ val equals : #c -> #c -> bool
    
    @return the hash code of the object
  *)
-val hashCode : #c -> int
+val hashCode : #javaScriptObject -> int
 
 (**
    Returns the results of calling [toString]> in JavaScript on the
    object, if the object implements toString; otherwise returns "[JavaScriptObject]".
  *)
-val toString : #c -> string
+val toString : #javaScriptObject -> string

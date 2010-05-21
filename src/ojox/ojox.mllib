@@ -1,3 +1,5 @@
+JavaString
+DOMTypes
 Document
 Element
 HandlerManager
@@ -5,3 +7,7 @@ JavaScriptObject
 Node
 OjoxEvent
 Style
+DOMImplAbstract
+DOMImplStandard
+DOMImplSafari
+DOMImpl

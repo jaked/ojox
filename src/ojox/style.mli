@@ -26,10 +26,3 @@
    
    See {!Element.getStyle()}
 *)
-
-class type c =
-object
-  inherit JavaScriptObject.c
-
-  (* XXX *)
-end

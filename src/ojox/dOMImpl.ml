@@ -1,7 +1,7 @@
 (*
  * This file is part of ojox, a library for web browser programming
- * Copyright (C) 2009 Jacob Donham
- * Original file (user/src/com/google/gwt/dom/client/Style.java
+ * Copyright (C) 2010 Jacob Donham
+ * Original file (user/super/com/google/gwt/dom/client/DOMImpl.java
  * in the GWT source distribution) is Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -16,3 +16,5 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *)
+
+include DOMImplSafari

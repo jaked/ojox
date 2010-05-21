@@ -17,169 +17,33 @@
  * the License.
  *)
 
-class type c =
-object
-  inherit Node.c
-
-  (**
-     Removes keyboard focus from this element.
-  *)
-  method blur : unit
-
-  (**
-     Gives keyboard focus to this element.
-  *)
-  method focus : unit
-
-  (**
-     The class attribute of the element. This attribute has been renamed due to
-     conflicts with the "class" keyword exposed by many languages.
-     
-     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class> W3C HTML Specification
-   *)
-  method _get_className : string
-
-  (**
-     Returns the inner height of an element in pixels, including padding but not
-     the horizontal scrollbar height, border, or margin.
-     
-     @return the element's client height
-   *)
-  method _get_clientHeight : string
-
-  (**
-     Returns the inner width of an element in pixels, including padding but not
-     the vertical scrollbar width, border, or margin.
-     
-     @return the element's client width
-   *)
-  method _get_clientWidth : string
-
-  (**
-     Specifies the base direction of directionally neutral text and the
-     directionality of tables.
-   *)
-  method _get_dir : string
-
-  (**
-     Returns a NodeList of all descendant Elements with a given tag name, in the
-     order in which they are encountered in a preorder traversal of this Element
-     tree.
-     
-     @param name The name of the tag to match on. The special value "*" matches
-              all tags
-     @return A list of matching Element nodes
-   *)
-  method getElementsByTagName : string -> c array
-
-  (**
-     The element's identifier.
-     
-     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id> W3C HTML Specification
-   *)
-  method _get_id : string
-
-  (**
-     Language code defined in RFC 1766.
-   *)
-  method _get_lang : string
-
-  (**
-     Returns a reference to the object which is the closest (nearest in the
-     containment hierarchy) positioned containing element.
-   *)
-  method _get_offsetParent : c
-
-  (**
-     Gets this element's {!Style} object.
-   *)
-  method _get_style : Style.c
-
-  (**
-     The index that represents the element's position in the tabbing order.
-     
-     @see <http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-tabindex> W3C HTML Specification
-  *)
-  method _get_tabIndex : int
-
-  (**
-     The element's advisory title.
-   *)
-  method _get_title : string
-
-  (**
-     Removes an attribute by name.
-   *)
-  method removeAttribute : string -> unit
-
-  (**
-     Adds a new attribute. If an attribute with that name is already present in
-     the element, its value is changed to be that of the value parameter.
-     
-     @param name The name of the attribute to create or alter
-     @param value Value to set in string form
-   *)
-  method setAttribute : string -> string -> unit
-
-  (**
-     The class attribute of the element. This attribute has been renamed due to
-     conflicts with the "class" keyword exposed by many languages.
-     
-     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-class> W3C HTML Specification
-   *)
-  method _set_className : string -> unit
-
-  (**
-     Specifies the base direction of directionally neutral text and the
-     directionality of tables.
-   *)
-  method _set_dir : string -> unit
-
-  (**
-     The element's identifier.
-     
-     @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id> W3C HTML Specification
-   *)
-  method _set_id : string -> unit
-
-
-
-  (**
-     Language code defined in RFC 1766.
-   *)
-  method _set_lang : string -> unit
-
-  (**
-     The number of pixels that an element's content is scrolled to the top.
-   *)
-  method _set_scrollTop : string -> unit
-end
+open DOMTypes
 
 (**
    Assert that the given {!Node} is an {!Element} and automatically
    typecast it.
  *)
-val as_javaScriptObject : JavaScriptObject.c -> c
+val as_javaScriptObject : javaScriptObject -> element
 
 (**
    Assert that the given {!Node} is an {!Element} and automatically
    typecast it.
  *)
-val as_node : Node.c -> c
+val as_node : node -> element
 
 (**
    Determines whether the given {!JavaScriptObject} can be cast to an
    {!Element}. A [null] object will cause this method to
    return [false].
  *)
-val is_javaScriptObject : JavaScriptObject.c -> bool
+val is_javaScriptObject : javaScriptObject -> bool
 
 (**
    Determine whether the given {!Node} can be cast to an {!Element}.
    A [null] node will cause this method to return
    [false].
  *)
-val is_node : Node.c -> bool
+val is_node : node -> bool
 
 (**
    Adds a name to this element's class property. If the name is already
@@ -188,31 +52,31 @@ val is_node : Node.c -> bool
    @param className the class name to be added
    see {!#setClassName(String)}
 *)
-val addClassName : c -> string -> unit
+val addClassName : element -> string -> unit
 
 (**
    Gets an element's absolute bottom coordinate in the document's coordinate
    system.
 *)
-val getAbsoluteBottom : c -> int
+val getAbsoluteBottom : element -> int
 
 (**
    Gets an element's absolute left coordinate in the document's coordinate
    system.
 *)
-val getAbsoluteLeft : c -> int
+val getAbsoluteLeft : element -> int
 
 (**
    Gets an element's absolute top coordinate in the document's coordinate
    system.
 *)
-val getAbsoluteTop : c -> int
+val getAbsoluteTop : element -> int
 
 (**
    Gets an element's absolute right coordinate in the document's coordinate
    system.
 *)
-val getAbsoluteRight : c -> int
+val getAbsoluteRight : element -> int
 
 (**
    Retrieves an attribute value by name.  Attribute support can be
@@ -224,51 +88,51 @@ val getAbsoluteRight : c -> int
    @return The Attr value as a string, or the empty string if that attribute
            does not have a specified or default value
 *)
-val getAttribute : c -> string -> string
+val getAttribute : element -> string -> string
 
 (**
    The first child of element this element. If there is no such element, this
    returns null.
 *)
-val getFirstChildElement : c -> c
+val getFirstChildElement : element -> element
 
 (**
   All of the markup and content within a given element.
 *)
-val getInnerHTML : c -> string
+val getInnerHTML : element -> string
 
 (**
    The text between the start and end tags of the object.
 *)
-val getInnerText : c -> string
+val getInnerText : element -> string
 
 (**
    The element immediately following this element. If there is no such
    element, this returns null.
 *)
-val getNextSiblingElement : c -> c
+val getNextSiblingElement : element -> element
 
 (**
    The height of an element relative to the layout.
  *)
-val getOffsetHeight : c -> int
+val getOffsetHeight : element -> int
 
 (**
    The number of pixels that the upper left corner of the current element is
    offset to the left within the offsetParent node.
  *)
-val getOffsetLeft : c -> int
+val getOffsetLeft : element -> int
 
 (**
    The number of pixels that the upper top corner of the current element is
    offset to the top within the offsetParent node.
  *)
-val getOffsetTop : c -> int
+val getOffsetTop : element -> int
 
 (**
    The width of an element relative to the layout.
  *)
-val getOffsetWidth : c -> int
+val getOffsetWidth : element -> int
 
 (**
    Gets a boolean property from this element.
@@ -276,7 +140,7 @@ val getOffsetWidth : c -> int
    @param name the name of the property to be retrieved
    @return the property value
  *)
-val getPropertyBoolean : c -> string -> bool
+val getPropertyBoolean : element -> string -> bool
 
 (**
    Gets a double property from this element.
@@ -284,7 +148,7 @@ val getPropertyBoolean : c -> string -> bool
    @param name the name of the property to be retrieved
    @return the property value
  *)
-val getPropertyDouble : c -> string -> float
+val getPropertyDouble : element -> string -> float
 
 (**
    Gets an integer property from this element.
@@ -292,7 +156,7 @@ val getPropertyDouble : c -> string -> float
    @param name the name of the property to be retrieved
    @return the property value
  *)
-val getPropertyInt : c -> string -> int
+val getPropertyInt : element -> string -> int
 
 (**
    Gets a JSO property from this element.
@@ -300,7 +164,7 @@ val getPropertyInt : c -> string -> int
    @param name the name of the property to be retrieved
    @return the property value
 *)
-val getPropertyJSO : c -> string -> JavaScriptObject.c
+val getPropertyJSO : element -> string -> javaScriptObject
 
 (**
    Gets a property from this element.
@@ -308,12 +172,12 @@ val getPropertyJSO : c -> string -> JavaScriptObject.c
    @param name the name of the property to be retrieved
    @return the property value
  *)
-val getPropertyString : c -> string -> string
+val getPropertyString : element -> string -> string
 
 (**
    The height of the scroll view of an element.
  *)
-val getScrollHeight : c -> int
+val getScrollHeight : element -> int
 
 (**
    The number of pixels that an element's content is scrolled from the left.
@@ -321,27 +185,27 @@ val getScrollHeight : c -> int
    If the element is in RTL mode, this method will return a negative value of
    the number of pixels scrolled from the right.
 *)
-val getScrollLeft : c -> int
+val getScrollLeft : element -> int
 
 (**
    The number of pixels that an element's content is scrolled from the top.
  *)
-val getScrollTop : c -> int
+val getScrollTop : element -> int
 
 (**
    The height of the scroll view of an element.
  *)
-val getScrollWidth : c -> int
+val getScrollWidth : element -> int
 
 (**
    Gets a string representation of this element (as outer HTML).
    
-   We do not override {@link #toString()} because it is final in
-   {@link com.google.gwt.core.client.JavaScriptObject}.
+   We do not override {!toString()} because it is final in
+   {!com.google.gwt.core.client.JavaScriptObject}.
    
    @return the string representation of this element
 *)
-val getString : c -> string
+val getString : element -> string
 
 (**
    Gets the element's full tag name, including the namespace-prefix if
@@ -349,7 +213,7 @@ val getString : c -> string
    
    @return the element's tag name
 *)
-val getTagName : c -> string
+val getTagName : element -> string
 
 (**
    Determines whether an element has an attribute with a given name.
@@ -360,7 +224,7 @@ val getTagName : c -> string
    @param name the name of the attribute
    @return <code>true</code> if this element has the specified attribute
 *)
-val hasAttribute : c -> string -> bool
+val hasAttribute : element -> string -> bool
 
 (**
   Determines whether this element has the given tag name.
@@ -368,7 +232,7 @@ val hasAttribute : c -> string -> bool
   @param tagName the tag name, including namespace-prefix (if present)
   @return <code>true</code> if the element has the given tag name
 *)
-val hasTagName : c -> string -> bool
+val hasTagName : element -> string -> bool
 
 (**
    Removes a name from this element's class property. If the name is not
@@ -377,7 +241,7 @@ val hasTagName : c -> string -> bool
    @param className the class name to be added
    see {!setClassName(String)}
 *)
-val removeClassName : c -> string -> unit
+val removeClassName : element -> string -> unit
 
 (**
   Replace one class name with another.
@@ -385,7 +249,7 @@ val removeClassName : c -> string -> unit
   @param oldClassName the class name to be replaced
   @param newClassName the class name to replace it
 *)
-val replaceClassName : c -> string -> string -> unit
+val replaceClassName : element -> string -> string -> unit
 
 (**
    Scrolls this element into view.
@@ -395,17 +259,17 @@ val replaceClassName : c -> string -> string -> unit
    specified element is completely in view. It adjusts each scroll position by
    the minimum amount necessary.
 *)
-val scrollIntoView : c -> unit
+val scrollIntoView : element -> unit
 
 (**
    All of the markup and content within a given element.
  *)
-val setInnerHTML : c -> string -> unit
+val setInnerHTML : element -> string -> unit
 
 (**
    The text between the start and end tags of the object.
 *)
-val setInnerText : c -> string -> unit
+val setInnerText : element -> string -> unit
 
 (**
    Sets a boolean property on this element.
@@ -413,7 +277,7 @@ val setInnerText : c -> string -> unit
    @param name the name of the property to be set
    @param value the new property value
  *)
-val setPropertyBoolean : c -> string -> bool -> unit
+val setPropertyBoolean : element -> string -> bool -> unit
 
 (**
    Sets a double property on this element.
@@ -421,7 +285,7 @@ val setPropertyBoolean : c -> string -> bool -> unit
    @param name the name of the property to be set
    @param value the new property value
  *)
-val setPropertyDouble : c -> string -> float -> unit
+val setPropertyDouble : element -> string -> float -> unit
 
 (**
    Sets an integer property on this element.
@@ -429,7 +293,7 @@ val setPropertyDouble : c -> string -> float -> unit
    @param name the name of the property to be set
    @param value the new property value
  *)
-val setPropertyInt : c -> string -> int -> unit
+val setPropertyInt : element -> string -> int -> unit
 
 (**
    Sets a JSO property on this element.
@@ -437,7 +301,7 @@ val setPropertyInt : c -> string -> int -> unit
    @param name the name of the property to be set
    @param value the new property value
 *)
-val setPropertyJSO : c -> string -> JavaScriptObject.c -> unit
+val setPropertyJSO : element -> string -> javaScriptObject -> unit
 
 (**
    Sets a property on this element.
@@ -445,14 +309,14 @@ val setPropertyJSO : c -> string -> JavaScriptObject.c -> unit
    @param name the name of the property to be set
    @param value the new property value
  *)
-val setPropertyString : c -> string -> string -> unit
+val setPropertyString : element -> string -> string -> unit
 
 (**
    The number of pixels that an element's content is scrolled to the left.
 *)
-val setScrollLeft : c -> int -> unit
+val setScrollLeft : element -> int -> unit
 
 (**
    The element's advisory title.
  *)
-val setTitle : c -> string -> unit
+val setTitle : element -> string -> unit

@@ -19,10 +19,4 @@
 
 open Ocamljs.Inline
 
-class type c =
-object
-  inherit Node.c
-
-end
-
 let get () = << $$doc >>

@@ -19,10 +19,6 @@
 
 open Ocamljs.Inline
 
-class type c =
-object
-end
-
 let createArray () = << [] >>
 
 let createFunction () = << function() {} >>
