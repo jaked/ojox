@@ -1,0 +1,4 @@
+name="Ojox"
+version="0.1"
+description="Clone of GWT widgets for ocamljs"
+archive(js) = "ojox.cmjsa"
