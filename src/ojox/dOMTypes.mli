@@ -30,10 +30,24 @@ class type nativeEvent =
 object
   inherit javaScriptObject
 
+  method initEvent : string -> bool -> bool -> unit
+  method initKeyEvent : 'a. string -> bool -> bool -> 'a -> bool -> bool -> bool -> bool -> int -> int -> unit
+  method initMouseEvent : 'a 'b. string -> bool -> bool -> 'a -> int -> int -> int -> int -> int -> bool -> bool -> bool -> bool -> int -> 'b -> unit
   method _get_currentTarget : eventTarget
+  method _get_relatedTarget : eventTarget
+  method _get_target : eventTarget
   method _get_type : string
+  method preventDefault : unit
+  method _set_altKey : bool -> unit
+  method _set_charCode : char -> unit
+  method _set_charCode_int : int -> unit
+  method _set_ctrlKey : bool -> unit
   method _set_keyCode : char -> unit
+  method _set_keyCode_int : int -> unit
+  method _set_metaKey : bool -> unit
+  method _set_shiftKey : bool -> unit
   method stopPropagation : unit
+  method toString : string
 end
 
 class type style =
@@ -77,6 +91,10 @@ object
    *)
   method cloneNode : bool -> node
 
+  method contains : node -> bool
+
+  method dispatchEvent : nativeEvent -> unit
+
   (**
      A NodeList that contains all children of this node. If there are no
      children, this is a NodeList containing no nodes.
@@ -119,7 +137,7 @@ object
      The Document object associated with this node. This is also the
      {!Document} object used to create new nodes.
    *)
-  method _get_ownerDocument : document
+  method _get_ownerDocument : 'a.'a
 
   (**
      The parent of this node. All nodes except Document may have a parent.
@@ -178,13 +196,6 @@ object
   constraint 'a = #node
 end
 
-and document =
-object
-  inherit node
-
-  method createElement : string -> 'a
-end
-
 class type element =
 object
   inherit node
@@ -213,7 +224,7 @@ object
      
      @return the element's client height
    *)
-  method _get_clientHeight : string
+  method _get_clientHeight : int
 
   (**
      Returns the inner width of an element in pixels, including padding but not
@@ -221,7 +232,7 @@ object
      
      @return the element's client width
    *)
-  method _get_clientWidth : string
+  method _get_clientWidth : int
 
   (**
      Specifies the base direction of directionally neutral text and the
@@ -260,6 +271,8 @@ object
    *)
   method _get_offsetParent : element
 
+  method _get_outerHTML : string
+
   (**
      Gets this element's {!Style} object.
    *)
@@ -272,10 +285,14 @@ object
   *)
   method _get_tabIndex : int
 
+  method _get_tagName : string
+
   (**
      The element's advisory title.
    *)
   method _get_title : string
+
+  method hasAttribute : string -> bool
 
   (**
      Removes an attribute by name.
@@ -317,10 +334,28 @@ object
    *)
   method _set_lang : string -> unit
 
+  method _set_scrollLeft : int -> unit
+
   (**
      The number of pixels that an element's content is scrolled to the top.
    *)
-  method _set_scrollTop : string -> unit
+  method _set_scrollTop : int -> unit
+end
+
+class type bodyElement =
+object
+  inherit element
+end
+
+class type document =
+object
+  inherit node
+
+  method createEvent : string -> nativeEvent
+  method createElement : string -> #element
+  method _get_compatMode : string
+  method _get_documentElement : element
+  method _get_body : bodyElement
 end
 
 class type buttonElement =
@@ -336,10 +371,19 @@ object
   inherit element
 end
 
+class type imageElement =
+object
+  inherit element
+
+  method _get_src : string
+  method _set_src : string -> unit
+end
+
 class type inputElement =
 object
   inherit element
 
+  method _set_name : string -> unit
   method _set_type : string -> unit
 end
 
@@ -366,14 +410,17 @@ class type selectElement =
 object
   inherit element
 
+  method add : optionElement -> optionElement -> unit
   method _get_disabled : bool
   method _get_form : formElement
   method _get_multiple : string
   method _get_name : string
+  method _get_options : optionElement array
   method _get_selectedIndex : int
   method _get_size : int
   method _get_type : string
   method _get_value : string
+  method remove : int -> unit
   method _set_disabled : bool -> unit
   method _set_disabled_string : string -> unit
   method _set_multiple : bool -> unit

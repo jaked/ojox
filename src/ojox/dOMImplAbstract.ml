@@ -162,3 +162,93 @@ let getParentElement node = <:rstmt<
   return parent;
 >>
 
+(* duplicated from Document to avoid recursive module reference *)
+let documentGetViewportElement doc =
+  if doc#_get_compatMode = "CSS1Compat"
+  then doc#_get_documentElement
+  else doc#_get_body
+
+let getScrollLeft elem = << $elem$.scrollLeft || 0 >>
+
+(* XXX careful when overriding getScrollLeft *)
+let getScrollLeft_document doc = getScrollLeft (documentGetViewportElement doc)
+
+(* duplicated from Element to avoid recursive module reference *)
+let elementGetScrollTop e = << $e$.scrollTop || 0 >>
+let elementGetScrollWidth e = << $e$.scrollWidth || 0 >>
+
+let getScrollTop doc = elementGetScrollTop (documentGetViewportElement doc)
+
+let getTagName elem = elem#_get_tagName
+
+let hasAttribute elem name = elem#hasAttribute name
+
+let imgGetSrc img = img#_get_src
+
+let imgSetSrc img src = img#_set_src src
+
+let scrollIntoView elem = <:stmt<
+  var left = $elem$.offsetLeft, top = $elem$.offsetTop;
+  var width = $elem$.offsetWidth, height = $elem$.offsetHeight;
+
+  if ($elem$.parentNode != $elem$.offsetParent) {
+    left -= $elem$.parentNode.offsetLeft;
+    top -= $elem$.parentNode.offsetTop;
+  }
+
+  var cur = $elem$.parentNode;
+  while (cur && (cur.nodeType == 1)) {
+    if (left < cur.scrollLeft) {
+      cur.scrollLeft = left;
+    }
+    if (left + width > cur.scrollLeft + cur.clientWidth) {
+      cur.scrollLeft = (left + width) - cur.clientWidth;
+    }
+    if (top < cur.scrollTop) {
+      cur.scrollTop = top;
+    }
+    if (top + height > cur.scrollTop + cur.clientHeight) {
+      cur.scrollTop = (top + height) - cur.clientHeight;
+    }
+
+    var offsetLeft = cur.offsetLeft, offsetTop = cur.offsetTop;
+    if (cur.parentNode != cur.offsetParent) {
+      offsetLeft -= cur.parentNode.offsetLeft;
+      offsetTop -= cur.parentNode.offsetTop;
+    }
+
+    left += offsetLeft - cur.scrollLeft;
+    top += offsetTop - cur.scrollTop;
+    cur = cur.parentNode;
+  }
+>>
+
+let selectAdd select option before = select#add option before
+
+let selectClear select = <:stmt< $select$.options.length = 0; >>
+
+let selectGetLength select = Array.length select#_get_options
+
+let selectGetOptions select = select#_get_options
+
+let selectRemoveOption select index = select#remove index
+
+let setInnerText elem text = <:stmt<
+  // Remove all children first.
+  while ($elem$.firstChild) {
+    $elem$.removeChild($elem$.firstChild);
+  }
+  // Add a new text node.
+  if ($text$ != null) {
+    $elem$.appendChild($elem$.ownerDocument.createTextNode($text$));
+  }
+>>
+
+let setScrollLeft elem left = elem#_set_scrollLeft left
+
+(* XXX careful when overriding setScrollLeft *)
+let setScrollLeft_document doc left = setScrollLeft (documentGetViewportElement doc) left
+
+let setScrollTop doc top = (documentGetViewportElement doc)#_set_scrollTop top
+
+let toString elem = elem#_get_outerHTML
