@@ -21,12 +21,12 @@ open DOMTypes
 
 val buttonClick : buttonElement -> unit
 val createButtonElement : document -> string -> buttonElement
-(*
 val createElement : document -> string -> element
-val createHtmlEvent : document -> string -> bool -> bool -> nativeEvent
+(* val createHtmlEvent : document -> string -> bool -> bool -> nativeEvent *)
 val createInputElement : document -> string -> inputElement
-val createInputRadioElement : document -> string -> inputElement
+(* val createInputRadioElement : document -> string -> inputElement *)
 
+(*
 val createKeyEvent :
   document ->
   string -> bool -> bool -> bool -> bool -> bool -> bool -> int -> int ->
@@ -36,13 +36,14 @@ val createMouseEvent :
   document ->
   string -> bool -> bool -> int -> int -> int -> int -> int -> bool -> bool -> bool -> bool -> int -> element ->
   nativeEvent
+*)
 
 val createScriptElement : document -> string -> scriptElement
 val createSelectElement : document -> bool -> selectElement
 val cssClearOpacity : style -> unit
 val cssFloatPropertyName : string
 val cssSetOpacity : style -> float -> unit
-val dispatchEvent : element -> nativeEvent -> unit
+(* val dispatchEvent : element -> nativeEvent -> unit *)
 val eventGetAltKey : nativeEvent -> bool
 val eventGetButton : nativeEvent -> int
 val eventGetClientX : nativeEvent -> int
@@ -51,17 +52,17 @@ val eventGetCtrlKey : nativeEvent -> bool
 val eventGetCurrentTarget : nativeEvent -> eventTarget
 val eventGetKeyCode : nativeEvent -> int
 val eventGetMetaKey : nativeEvent -> bool
-val eventGetMouseWheelVelocityY : nativeEvent -> int
-val eventGetRelatedTarget : nativeEvent -> eventTarget
+(* val eventGetMouseWheelVelocityY : nativeEvent -> int *)
+(* val eventGetRelatedTarget : nativeEvent -> eventTarget *)
 val eventGetScreenX : nativeEvent -> int
 val eventGetScreenY : nativeEvent -> int
 val eventGetShiftKey : nativeEvent -> bool
-val eventGetTarget : nativeEvent -> eventTarget
+(* val eventGetTarget : nativeEvent -> eventTarget *)
 val eventGetType : nativeEvent -> string
-val eventPreventDefault : nativeEvent -> unit
+(* val eventPreventDefault : nativeEvent -> unit *)
 val eventSetKeyCode : nativeEvent -> char -> unit
 val eventStopPropagation : nativeEvent -> unit
-val eventToString : nativeEvent -> string
+(* val eventToString : nativeEvent -> string *)
 val getAbsoluteLeft : element -> int
 val getAbsoluteTop : element -> int
 val getAttribute : element -> string -> string
@@ -73,6 +74,7 @@ val getInnerText : element -> string
 val getNextSiblingElement : element -> element
 val getNodeType : node -> int
 val getParentElement : node -> element
+(*
 val getScrollLeft : document -> int
 val getScrollTop : document -> int
 val getTageName : element -> string

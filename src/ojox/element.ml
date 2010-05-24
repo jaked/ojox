@@ -158,15 +158,15 @@ let replaceClassName e oldClassName newClassName =
 let scrollIntoView e = failwith "unimplemented"
   (* DOMImpl.impl.scrollIntoView(this); *)
 
-let setInnerHTML e html = <:stmt< ($e$).innerHTML = $html$ || ''; >>
+let setInnerHTML e html = <:stmt< $e$.innerHTML = $html$ || ''; >>
 let setInnerText e text = failwith "unimplemented"
   (* DOMImpl.impl.setInnerText(this, text); *)
 
-let setPropertyBoolean e name value = <:stmt< ($e$)[$name$] = $value$; >>
-let setPropertyDouble e name value = <:stmt< ($e$)[$name$] = $value$; >>
-let setPropertyInt e name value = <:stmt< ($e$)[$name$] = $value$; >>
-let setPropertyJSO e name value = <:stmt< ($e$)[$name$] = $value$; >>
-let setPropertyString e name value = <:stmt< ($e$)[$name$] = $value$; >>
+let setPropertyBoolean e name value = <:stmt< $e$[$name$] = $value$; >>
+let setPropertyDouble e name value = <:stmt< $e$[$name$] = $value$; >>
+let setPropertyInt e name value = <:stmt< $e$[$name$] = $value$; >>
+let setPropertyJSO e name value = <:stmt< $e$[$name$] = $value$; >>
+let setPropertyString e name value = <:stmt< $e$[$name$] = $value$; >>
 
 let setScrollLeft e scrollLeft = failwith "unimplemented"
   (* DOMImpl.impl.setScrollLeft(this, scrollLeft) *)
@@ -174,4 +174,4 @@ let setScrollLeft e scrollLeft = failwith "unimplemented"
 let setTitle e title =
   (* Setting the title to null results in the string "null" being displayed
      on some browsers. *)
-  <:stmt< ($e$).title = $title$ || ''; >>
+  <:stmt< $e$.title = $title$ || ''; >>

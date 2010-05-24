@@ -27,11 +27,19 @@ end
 class type nativeEvent =
 object
   inherit javaScriptObject
+
+  method _get_currentTarget : eventTarget
+  method _get_type : string
+  method _set_keyCode : char -> unit
+  method stopPropagation : unit
 end
 
 class type style =
 object
   inherit javaScriptObject
+
+  method _set_opacity : float -> unit
+  method _set_opacity_string : string -> unit
 end
 
 class type node =
@@ -171,6 +179,8 @@ end
 and document =
 object
   inherit node
+
+  method createElement : string -> 'a
 end
 
 class type element =
@@ -234,6 +244,8 @@ object
      @see <http://www.w3.org/TR/1999/REC-html401-19991224/struct/global.html#adef-id> W3C HTML Specification
    *)
   method _get_id : string
+
+  method _get_innerHTML : string
 
   (**
      Language code defined in RFC 1766.
@@ -312,11 +324,21 @@ end
 class type buttonElement =
 object
   inherit element
+
+  method _set_type : string -> unit
+  method click : unit
+end
+
+class type formElement =
+object
+  inherit element
 end
 
 class type inputElement =
 object
   inherit element
+
+  method _set_type : string -> unit
 end
 
 class type optionElement =
@@ -327,9 +349,35 @@ end
 class type scriptElement =
 object
   inherit element
+
+  method _get_defer : string
+  method _get_src : string
+  method _get_text : string
+  method _get_type : string
+  method _set_defer : string -> unit
+  method _set_src : string -> unit
+  method _set_text : string -> unit
+  method _set_type : string -> unit
 end
 
 class type selectElement =
 object
   inherit element
+
+  method _get_disabled : bool
+  method _get_form : formElement
+  method _get_multiple : string
+  method _get_name : string
+  method _get_selectedIndex : int
+  method _get_size : int
+  method _get_type : string
+  method _get_value : string
+  method _set_disabled : bool -> unit
+  method _set_disabled_string : string -> unit
+  method _set_multiple : bool -> unit
+  method _set_name : string -> unit
+  method _set_selectedIndex : int -> unit
+  method _set_size : int -> unit
+  method _set_type : string -> unit
+  method _set_value : string -> unit
 end

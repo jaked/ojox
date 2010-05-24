@@ -18,10 +18,147 @@
  *)
 
 open Ocamljs.Inline
+open DOMTypes
 
-let buttonClick button = <:stmt< $exp:button$.click(); >>
+let buttonClick button = button#click
 
 let createButtonElement doc type_ =
-  let e = << $doc$.createElement("BUTTON") >> in
-  <:stmt< $exp:e$.type = $type_$; >>;
+  let e = (<< $doc$.createElement("BUTTON") >> : buttonElement) in
+  e#_set_type type_;
   e
+
+let createElement doc tag = << $doc$.createElement($tag$) >>
+
+let createInputElement doc type_ =
+  let e = (<< $doc$.createElement("INPUT") >> : inputElement) in
+  e#_set_type type_;
+  e
+
+let createScriptElement doc source =
+  let elem = (createElement doc "script" : scriptElement) in
+  elem#_set_text source;
+  elem
+
+let createSelectElement doc multiple =
+  let select = (createElement doc "select" : selectElement) in
+  if multiple then select#_set_multiple true;
+  select
+
+let cssClearOpacity style = style#_set_opacity_string ""
+
+let cssFloatPropertyName = "cssFloat"
+
+let cssSetOpacity style value = style#_set_opacity value
+
+let eventGetAltKey evt = << !!$evt$.altKey >>
+
+let eventGetButton evt = << $evt$.button || 0 >>
+
+let eventGetClientX evt = << $evt$.clientX || 0 >>
+
+let eventGetClientY evt = << $evt$.clientY || 0 >>
+
+let eventGetCtrlKey evt = << !!$evt$.ctrlKey >>
+
+let eventGetCurrentTarget evt = evt#_get_currentTarget
+
+let eventGetKeyCode evt =
+  (*
+    'which' gives the right key value, except when it doesn't -- in which
+    case, keyCode gives the right value on all browsers.
+    If all else fails, return an error code
+  *)
+  << $evt$.which || $evt$.keyCode || 0 >>
+
+let eventGetMetaKey evt = << !!$evt$.metaKey >>
+
+let eventGetScreenX evt = << $evt$.screenX || 0 >>
+
+let eventGetScreenY evt = << $evt$.screenY || 0 >>
+
+let eventGetShiftKey evt = << !!$evt$.shiftKey >>
+
+let eventGetType evt = evt#_get_type
+
+let eventSetKeyCode evt key = evt#_set_keyCode key
+
+let eventStopPropagation evt = evt#stopPropagation
+
+let getAbsoluteLeft elem = <:rstmt<
+  var left = 0;
+  var curr = $elem$;
+  // This intentionally excludes body which has a null offsetParent.    
+  while (curr.offsetParent) {
+    left -= curr.scrollLeft;
+    curr = curr.parentNode;
+  }
+  while (elem) {
+    left += elem.offsetLeft;
+    elem = elem.offsetParent;
+  }
+  return left;
+>>
+
+let getAbsoluteTop elem = <:rstmt<
+  var top = 0;
+  var curr = $elem$;
+  // This intentionally excludes body which has a null offsetParent.    
+  while (curr.offsetParent) {
+    top -= curr.scrollTop;
+    curr = curr.parentNode;
+  }
+  while (elem) {
+    top += elem.offsetTop;
+    elem = elem.offsetParent;
+  }
+  return top;
+>>
+
+let getAttribute elem name = << $elem$.getAttribute($name$) || '' >>
+
+let getBodyOffsetLeft doc = 0
+
+let getBodyOffsetTop doc = 0
+
+let getFirstChildElement elem = <:rstmt<
+  var child = $elem$.firstChild;
+  while (child && child.nodeType != 1)
+    child = child.nextSibling;
+  return child;
+>>
+
+let getInnerHTML elem = elem#_get_innerHTML
+
+let rec getInnerText node = <:rstmt<
+  // To mimic IE's 'innerText' property in the W3C DOM, we need to recursively
+  // concatenate all child text nodes (depth first).
+  var text = '', child = $node$.firstChild;
+  while (child) {
+    // 1 == Element node
+    if (child.nodeType == 1) {
+      text += $getInnerText << child >> $;
+    } else if (child.nodeValue) {
+      text += child.nodeValue;
+    }
+    child = child.nextSibling;
+  }
+  return text;
+>>
+
+let getNextSiblingElement elem = <:rstmt<
+  var sib = $elem$.nextSibling;
+  while (sib && sib.nodeType != 1)
+    sib = sib.nextSibling;
+  return sib;
+>>
+
+let getNodeType node = node#_get_nodeType
+
+let getParentElement node = <:rstmt<
+  var parent = $node$.parentNode;
+  if (!parent || parent.nodeType != 1) {
+    parent = null;
+  }
+  return parent;
+>>
+
