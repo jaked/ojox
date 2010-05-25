@@ -71,7 +71,7 @@ val getInnerHTML : element -> string
 val getInnerText : element -> string
 val getNextSiblingElement : element -> element
 val getNodeType : node -> int
-val getParentElement : node -> element
+val getParentElement : #node -> #element
 val getScrollLeft : element -> int
 val getScrollLeft_document : document -> int
 val getScrollTop : document -> int
@@ -79,7 +79,7 @@ val getTagName : element -> string
 val hasAttribute : element -> string -> bool
 val imgGetSrc : imageElement -> string
 val imgSetSrc : imageElement -> string -> unit
-val isOrHasChild : node -> node -> bool
+val isOrHasChild : #node -> #node -> bool
 val scrollIntoView : element -> unit
 val selectAdd : selectElement -> optionElement -> optionElement -> unit
 val selectClear : selectElement -> unit
