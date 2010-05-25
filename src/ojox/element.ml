@@ -18,29 +18,30 @@
  *)
 
 open Ocamljs.Inline
+open DOMTypes
 
 let is_node o =
   not (Ocamljs.is_null o) && o#_get_nodeType = Node.eLEMENT_NODE
 
 let is_javaScriptObject o =
   if Node.is o
-  then is_node (Obj.magic o : DOMTypes.node)
+  then is_node (Obj.magic o : #DOMTypes.node)
   else false
 
 let as_javaScriptObject o =
   assert (is_javaScriptObject o);
-  (Obj.magic o : DOMTypes.element)
+  (Obj.magic o : #DOMTypes.element)
 
 let as_node o =
   assert (is_node o);
-  (Obj.magic o : DOMTypes.element)
+  (Obj.magic o : #DOMTypes.element)
 
-let addClassName e className =
+let addClassName this className =
   let className = JavaString.trim className in
   if JavaString.length className = 0 then failwith "Unexpectedly empty class name";
 
   (* Get the current style string. *)
-  let oldClassName = ref e#_get_className in
+  let oldClassName = ref this#_get_className in
   let idx = ref (JavaString.indexOf !oldClassName className) in
 
   (* Calculate matching index. *)
@@ -59,69 +60,82 @@ let addClassName e className =
   then begin
     if JavaString.length !oldClassName > 0
     then oldClassName := !oldClassName ^ " ";
-    e#_set_className (!oldClassName ^ className)
+    this#_set_className (!oldClassName ^ className)
   end  
 
-let getAbsoluteLeft e = failwith "unimplemented"
-  (* DOMImpl.impl.getAbsoluteLeft(this); *)
+let blur this = this#blur
 
-let getAbsoluteTop e = failwith "unimplemented"
-  (* DOMImpl.impl.getAbsoluteTop(this); *)
+let dispatchEvent this evt = DOMImpl.dispatchEvent this evt
 
-let getAttribute e name = failwith "unimplemented"
-  (* DOMImpl.impl.getAttribute(this, name); *)
+let focus this = this#focus
 
-let getFirstChildElement e = failwith "unimplemented"
-  (* DOMImpl.impl.getFirstChildElement(this); *)
+let getAbsoluteLeft this = DOMImpl.getAbsoluteLeft this
+let getAbsoluteTop this = DOMImpl.getAbsoluteTop this
 
-let getInnerHTML e = failwith "unimplemented"
-  (* DOMImpl.impl.getInnerHTML(this); *)
+let getAttribute this name = DOMImpl.getAttribute this name
 
-let getInnerText e = failwith "unimplemented"
-  (* DOMImpl.impl.getInnerText(this); *)
+let getClassName this = this#_get_className
+let getClientHeight this = this#_get_clientHeight
+let getClientWidth this = this#_get_clientWidth
+let getDir this = this#_get_dir
 
-let getNextSiblingElement e = failwith "unimplemented"
-  (* DOMImpl.impl.getNextSiblingElement(this); *)
+let getElementsByTagName (this : #element) name = this#getElementsByTagName name
 
-let getOffsetHeight e = << $e$.offsetHeight || 0 >>
-let getOffsetLeft e = << $e$.offsetLeft || 0 >>
-let getOffsetTop e = << $e$.offsetTop || 0 >>
-let getOffsetWidth e = << $e$.offsetWidth || 0 >>
+let getFirstChildElement this = DOMImpl.getFirstChildElement this
 
-let getAbsoluteBottom e = getAbsoluteTop e + getOffsetHeight e
-let getAbsoluteRight e = getAbsoluteLeft e + getOffsetWidth e
+let getId this = this#_get_id
 
-let getPropertyBoolean e name = << !!$e$[$name$] >>
-let getPropertyDouble e name =  << parseFloat($e$[$name$]) || 0.0 >>
-let getPropertyInt e name =  << parseInt($e$[$name$]) || 0 >>
-let getPropertyJSO e name = << $e$[$name$] || null >>
-let getPropertyString e name =  << ($e$[$name$] == null) ? null : String($e$[$name$]) >>
+let getInnerHTML this = DOMImpl.getInnerHTML this
 
-let getScrollHeight e = << $e$.scrollHeight || 0 >>
+let getInnerText this = DOMImpl.getInnerText this
 
-let getScrollLeft e = failwith "unimplemented"
-  (* DOMImpl.impl.getScrollLeft(this); *)
+let getLang this = this#_get_lang
 
-let getScrollTop e = << $e$.scrollTop || 0 >>
-let getScrollWidth e = << $e$.scrollWidth || 0 >>
+let getNextSiblingElement this = DOMImpl.getNextSiblingElement this
 
-let getString e = failwith "unimplemented"
-  (* DOMImpl.impl.toString(this); *)
+let getOffsetHeight this = << $this$.offsetHeight || 0 >>
+let getOffsetLeft this = << $this$.offsetLeft || 0 >>
+let getOffsetTop this = << $this$.offsetTop || 0 >>
+let getOffsetParent (this : #element) = this#_get_offsetParent
+let getOffsetWidth this = << $this$.offsetWidth || 0 >>
 
-let getTagName e = failwith "unimplemented"
-  (* return DOMImpl.impl.getTagName(this); *)
+let getAbsoluteBottom this = getAbsoluteTop this + getOffsetHeight this
+let getAbsoluteRight this = getAbsoluteLeft this + getOffsetWidth this
 
-let hasAttribute e name = failwith "unimplemented"
-  (* return DOMImpl.impl.hasAttribute(this, name); *)
+let getPropertyBoolean this name = << !!$this$[$name$] >>
+let getPropertyDouble this name =  << parseFloat($this$[$name$]) || 0.0 >>
+let getPropertyInt this name =  << parseInt($this$[$name$]) || 0 >>
+let getPropertyJSO this name = << $this$[$name$] || null >>
+let getPropertyString this name =  << ($this$[$name$] == null) ? null : String($this$[$name$]) >>
 
-let hasTagName e tagName = tagName = getTagName e
+let getScrollHeight this = << $this$.scrollHeight || 0 >>
 
-let removeClassName e className =
+let getScrollLeft this = DOMImpl.getScrollLeft this
+
+let getScrollTop this = << $this$.scrollTop || 0 >>
+let getScrollWidth this = << $this$.scrollWidth || 0 >>
+
+let getString this = DOMImpl.toString this
+
+let getStyle this = this#_get_style
+let getTabIndex this = this#_get_tabIndex
+
+let getTagName this = DOMImpl.getTagName this
+
+let getTitle this = this#_get_title
+
+let hasAttribute this name = DOMImpl.hasAttribute this name
+
+let hasTagName this tagName = tagName = getTagName this
+
+let removeAttribute this name = this#removeAttribute name
+
+let removeClassName this className =
   let className = JavaString.trim className in
   if JavaString.length className = 0 then failwith "Unexpectedly empty class name";
 
   (* Get the current style string. *)
-  let oldStyle = e#_get_className in
+  let oldStyle = this#_get_className in
   let idx = ref (JavaString.indexOf oldStyle className) in
 
   (* Calculate matching index. *)
@@ -148,30 +162,38 @@ let removeClassName e className =
       if JavaString.length begin_ = 0 then end_
       else if JavaString.length end_ = 0 then begin_
       else begin_ ^ " " ^ end_ in
-    e#_set_className newClassName
+    this#_set_className newClassName
   end
 
-let replaceClassName e oldClassName newClassName =
-  removeClassName e oldClassName;
-  addClassName e newClassName
+let replaceClassName this oldClassName newClassName =
+  removeClassName this oldClassName;
+  addClassName this newClassName
 
-let scrollIntoView e = failwith "unimplemented"
-  (* DOMImpl.impl.scrollIntoView(this); *)
+let scrollIntoView this = DOMImpl.scrollIntoView this
 
-let setInnerHTML e html = <:stmt< $e$.innerHTML = $html$ || ''; >>
-let setInnerText e text = failwith "unimplemented"
-  (* DOMImpl.impl.setInnerText(this, text); *)
+let setAttribute this name value = this#setAttribute name value
 
-let setPropertyBoolean e name value = <:stmt< $e$[$name$] = $value$; >>
-let setPropertyDouble e name value = <:stmt< $e$[$name$] = $value$; >>
-let setPropertyInt e name value = <:stmt< $e$[$name$] = $value$; >>
-let setPropertyJSO e name value = <:stmt< $e$[$name$] = $value$; >>
-let setPropertyString e name value = <:stmt< $e$[$name$] = $value$; >>
+let setClassName this className = this#_set_className className
+let setDir this dir = this#_set_dir dir
+let setId this id = this#_set_id id
 
-let setScrollLeft e scrollLeft = failwith "unimplemented"
-  (* DOMImpl.impl.setScrollLeft(this, scrollLeft) *)
+let setInnerHTML this html = <:stmt< $this$.innerHTML = $html$ || ''; >>
+let setInnerText this text = DOMImpl.setInnerText this text
 
-let setTitle e title =
+let setLang this lang = this#_set_lang lang
+
+let setPropertyBoolean this name value = <:stmt< $this$[$name$] = $value$; >>
+let setPropertyDouble this name value = <:stmt< $this$[$name$] = $value$; >>
+let setPropertyInt this name value = <:stmt< $this$[$name$] = $value$; >>
+let setPropertyJSO this name value = <:stmt< $this$[$name$] = $value$; >>
+let setPropertyString this name value = <:stmt< $this$[$name$] = $value$; >>
+
+let setScrollLeft this scrollLeft = DOMImpl.setScrollLeft this scrollLeft
+let setScrollTop this scrollTop = this#_set_scrollTop scrollTop
+
+let setTabIndex this tabIndex = this#_set_tabIndex tabIndex
+
+let setTitle this title =
   (* Setting the title to null results in the string "null" being displayed
      on some browsers. *)
-  <:stmt< $e$.title = $title$ || ''; >>
+  <:stmt< $this$.title = $title$ || ''; >>

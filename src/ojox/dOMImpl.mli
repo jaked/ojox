@@ -41,7 +41,7 @@ val createSelectElement : document -> bool -> selectElement
 val cssClearOpacity : style -> unit
 val cssFloatPropertyName : string
 val cssSetOpacity : style -> float -> unit
-val dispatchEvent : element -> nativeEvent -> unit
+val dispatchEvent : #element -> nativeEvent -> unit
 val eventGetAltKey : nativeEvent -> bool
 val eventGetButton : nativeEvent -> int
 val eventGetClientX : nativeEvent -> int
@@ -61,33 +61,33 @@ val eventPreventDefault : nativeEvent -> unit
 val eventSetKeyCode : nativeEvent -> char -> unit
 val eventStopPropagation : nativeEvent -> unit
 val eventToString : nativeEvent -> string
-val getAbsoluteLeft : element -> int
-val getAbsoluteTop : element -> int
-val getAttribute : element -> string -> string
+val getAbsoluteLeft : #element -> int
+val getAbsoluteTop : #element -> int
+val getAttribute : #element -> string -> string
 val getBodyOffsetLeft : document -> int
 val getBodyOffsetTop : document -> int
-val getFirstChildElement : element -> element
-val getInnerHTML : element -> string
-val getInnerText : element -> string
-val getNextSiblingElement : element -> element
+val getFirstChildElement : #element -> #element
+val getInnerHTML : #element -> string
+val getInnerText : #element -> string
+val getNextSiblingElement : #element -> #element
 val getNodeType : node -> int
 val getParentElement : #node -> #element
-val getScrollLeft : element -> int
+val getScrollLeft : #element -> int
 val getScrollLeft_document : document -> int
 val getScrollTop : document -> int
-val getTagName : element -> string
-val hasAttribute : element -> string -> bool
+val getTagName : #element -> string
+val hasAttribute : #element -> string -> bool
 val imgGetSrc : imageElement -> string
 val imgSetSrc : imageElement -> string -> unit
 val isOrHasChild : #node -> #node -> bool
-val scrollIntoView : element -> unit
+val scrollIntoView : #element -> unit
 val selectAdd : selectElement -> optionElement -> optionElement -> unit
 val selectClear : selectElement -> unit
 val selectGetLength : selectElement -> int
 val selectGetOptions : selectElement -> optionElement array
 val selectRemoveOption : selectElement -> int -> unit
-val setInnerText : element -> string -> unit
-val setScrollLeft : element -> int -> unit
+val setInnerText : #element -> string -> unit
+val setScrollLeft : #element -> int -> unit
 val setScrollLeft_document : document -> int -> unit
 val setScrollTop : document -> int -> unit
-val toString : element -> string
+val toString : #element -> string

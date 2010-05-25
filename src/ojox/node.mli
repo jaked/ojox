@@ -45,14 +45,14 @@ val dOCUMENT_NODE : int
    Assert that the given {!JavaScriptObject} is a DOM node and
    automatically typecast it.
  *)
-val as_ : javaScriptObject -> node
+val as_ : #javaScriptObject -> node
 
 (**
    Determines whether the given {!JavaScriptObject} is a DOM node. A
    [null] object will cause this method to return
    [false].
  *)
-val is : javaScriptObject -> bool
+val is : #javaScriptObject -> bool
 
 (**
    Adds the node newChild to the end of the list of children of this node. If
