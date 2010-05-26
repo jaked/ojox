@@ -1,7 +1,7 @@
 (*
  * This file is part of ojox, a library for web browser programming
- * Copyright (C) 2010 Jacob Donham
- * Original file (user/super/com/google/gwt/emul/java/lang/String.java
+ * Copyright (C) 2009 Jacob Donham
+ * Original file (user/src/com/google/gwt/dom/client/HeadElement.java
  * in the GWT source distribution) is Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -17,11 +17,5 @@
  * the License.
  *)
 
-(** Enough java.lang.String functions to make porting straightforward. *)
+let tAG = "head"
 
-val charAt : string -> int -> char
-val contains : string -> string -> bool
-val indexOf : string -> ?startIndex:int -> string -> int
-val length : string -> int
-val substring : string -> ?endIndex:int -> int -> string
-val trim : string -> string

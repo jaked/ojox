@@ -16,3 +16,15 @@
  * License for the specific language governing permissions and limitations under
  * the License.
  *)
+
+open Ocamljs.Inline
+
+let assertCamelCase name =
+  if JavaString.contains name "-"
+  then failwith ("The style name '" ^ name ^ "' should be in camelCase format")
+
+let setPropertyImpl this name value = <:stmt< $this$[$name$] = $value$; >>
+
+let setProperty this name value =
+  assertCamelCase name;
+  setPropertyImpl this name value

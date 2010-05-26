@@ -17,6 +17,8 @@
  * the License.
  *)
 
+open DOMTypes
+
 (**
    Provides programmatic access to properties of the style object.
    
@@ -26,3 +28,5 @@
    
    See {!Element.getStyle()}
 *)
+
+val setProperty : style -> string -> string -> unit

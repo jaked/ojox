@@ -17,8 +17,9 @@
  * the License.
  *)
 
-let trim s = failwith "unimplemented"
-let length s = failwith "unimplemented"
 let charAt s index = failwith "unimplemented"
+let contains s1 s2 = failwith "unimplemented"
 let indexOf s ?startIndex str = failwith "unimplemented"
+let length s = failwith "unimplemented"
 let substring s ?endIndex startIndex = failwith "unimplemented"
+let trim s = failwith "unimplemented"

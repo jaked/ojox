@@ -163,7 +163,7 @@ let getParentElement node = <:rstmt<
 >>
 
 (* duplicated from Document to avoid recursive module reference *)
-let documentGetViewportElement doc =
+let documentGetViewportElement (doc : document) =
   if doc#_get_compatMode = "CSS1Compat"
   then doc#_get_documentElement
   else doc#_get_body

@@ -21,7 +21,7 @@ open DOMTypes
 
 val buttonClick : buttonElement -> unit
 val createButtonElement : document -> string -> buttonElement
-val createElement : document -> string -> element
+val createElement : document -> string -> #element
 val createHtmlEvent : document -> string -> bool -> bool -> nativeEvent
 val createInputElement : document -> string -> inputElement
 val createInputRadioElement : document -> string -> inputElement
@@ -33,7 +33,7 @@ val createKeyEvent :
 
 val createMouseEvent :
   document ->
-  string -> bool -> bool -> int -> int -> int -> int -> int -> bool -> bool -> bool -> bool -> int -> element ->
+  string -> bool -> bool -> int -> int -> int -> int -> int -> bool -> bool -> bool -> bool -> int -> #element ->
   nativeEvent
 
 val createScriptElement : document -> string -> scriptElement

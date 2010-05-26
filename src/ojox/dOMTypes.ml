@@ -81,6 +81,11 @@ object
   method _set_nodeValue : string -> unit
 end
 
+class type text =
+object
+  inherit node
+end
+
 class type element =
 object
   inherit node
@@ -112,6 +117,26 @@ object
   method _set_scrollTop : int -> unit
 end
 
+class type anchorElement =
+object
+  inherit element
+end
+
+class type areaElement =
+object
+  inherit element
+end
+
+class type baseElement =
+object
+  inherit element
+end
+
+class type bRElement =
+object
+  inherit element
+end
+
 class type bodyElement =
 object
   inherit element
@@ -123,9 +148,18 @@ object
 
   method createEvent : string -> nativeEvent
   method createElement : string -> #element
-  method _get_compatMode : string
-  method _get_documentElement : element
+  method createTextNode : string -> text
   method _get_body : bodyElement
+  method _get_compatMode : string
+  method _get_documentElement : #element
+  method _get_domain : string
+  method getElementById : string -> #element
+  method getElementsByTagName : string -> #element array
+  method _get_referrer : string
+  method _get_title : string
+  method _get_URL : string
+  method importNode : #node -> bool -> unit
+  method _set_title : string -> unit
 end
 
 class type buttonElement =
@@ -136,7 +170,52 @@ object
   method click : unit
 end
 
+class type divElement =
+object
+  inherit element
+end
+
+class type dListElement =
+object
+  inherit element
+end
+
+class type fieldSetElement =
+object
+  inherit element
+end
+
 class type formElement =
+object
+  inherit element
+end
+
+class type frameElement =
+object
+  inherit element
+end
+
+class type frameSetElement =
+object
+  inherit element
+end
+
+class type headElement =
+object
+  inherit element
+end
+
+class type headingElement =
+object
+  inherit element
+end
+
+class type hRElement =
+object
+  inherit element
+end
+
+class type iFrameElement =
 object
   inherit element
 end
@@ -157,7 +236,77 @@ object
   method _set_type : string -> unit
 end
 
+class type labelElement =
+object
+  inherit element
+end
+
+class type legendElement =
+object
+  inherit element
+end
+
+class type lIElement =
+object
+  inherit element
+end
+
+class type linkElement =
+object
+  inherit element
+end
+
+class type mapElement =
+object
+  inherit element
+end
+
+class type metaElement =
+object
+  inherit element
+end
+
+class type modElement =
+object
+  inherit element
+end
+
+class type objectElement =
+object
+  inherit element
+end
+
+class type oListElement =
+object
+  inherit element
+end
+
 class type optionElement =
+object
+  inherit element
+end
+
+class type optGroupElement =
+object
+  inherit element
+end
+
+class type paragraphElement =
+object
+  inherit element
+end
+
+class type paramElement =
+object
+  inherit element
+end
+
+class type preElement =
+object
+  inherit element
+end
+
+class type quoteElement =
 object
   inherit element
 end
@@ -199,4 +348,59 @@ object
   method _set_size : int -> unit
   method _set_type : string -> unit
   method _set_value : string -> unit
+end
+
+class type spanElement =
+object
+  inherit element
+end
+
+class type styleElement =
+object
+  inherit element
+end
+
+class type tableElement =
+object
+  inherit element
+end
+
+class type tableCaptionElement =
+object
+  inherit element
+end
+
+class type tableCellElement =
+object
+  inherit element
+end
+
+class type tableColElement =
+object
+  inherit element
+end
+
+class type tableRowElement =
+object
+  inherit element
+end
+
+class type tableSectionElement =
+object
+  inherit element
+end
+
+class type textAreaElement =
+object
+  inherit element
+end
+
+class type titleElement =
+object
+  inherit element
+end
+
+class type uListElement =
+object
+  inherit element
 end
