@@ -17,5 +17,23 @@
  * the License.
  *)
 
+open Ocamljs.Inline
+
 let tAG = "img"
 
+let as_ elem =
+  assert (JavaString.equalsIgnoreCase (Element.getTagName elem) tAG);
+  Obj.magic elem
+
+let getAlt this = this#_get_alt
+let getHeight this = this#_get_height
+let getSrc = DOMImpl.imgGetSrc
+let getWidth this = this#_get_width
+let isMap this = << !!$this$.isMap >>
+let setAlt this alt = this#_set_alt alt
+let setHeight this height = this#_set_height height
+let setIsMap this isMap = this#_set_isMap isMap
+let setSrc = DOMImpl.imgSetSrc
+let setUseMap this useMap = this#_set_useMap useMap
+let setWidth this width = this#_set_width width
+let useMap this = << !!$this$.useMap >>

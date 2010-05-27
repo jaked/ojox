@@ -1,7 +1,7 @@
 (*
  * This file is part of ojox, a library for web browser programming
  * Copyright (C) 2009 Jacob Donham
- * Original file (user/src/com/google/gwt/dom/client/optionElement.java
+ * Original file (user/src/com/google/gwt/dom/client/SelectElement.java
  * in the GWT source distribution) is Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -19,23 +19,32 @@
 
 open Ocamljs.Inline
 
-let tAG = "option"
+let tAG = "select"
 
 let as_ elem =
   assert (JavaString.equalsIgnoreCase (Element.getTagName elem) tAG);
   Obj.magic elem
 
+let add = DOMImpl.selectAdd
+let clear = DOMImpl.selectClear
+let getDisabled this = this#_get_disabled
 let getForm this = this#_get_form
-let getIndex this = this#_get_index
-let getLabel this = this#_get_label
-let getText this = this#_get_text
+let getLength = DOMImpl.selectGetLength
+let getMultiple this = this#_get_multiple
+let getName this = this#_get_name
+let getOptions = DOMImpl.selectGetOptions
+let getSelectedIndex this = this#_get_selectedIndex
+let getSize this = this#_get_size
+let getType this = this#_get_type
 let getValue this = this#_get_value
-let isDefaultSelected this = << !!$this$.defaultSelected >>
 let isDisabled this = << !!$this$.disabled >>
-let isSelected this = << !!$this$.selected >>
-let setDefaultSelected this selected = this#_set_defaultSelected selected
+let isMultiple this = << !!$this$.multiple >>
+let remove = DOMImpl.selectRemoveOption
 let setDisabled this disabled = this#_set_disabled disabled
-let setLabel this label = this#_set_label label
-let setSelected this selected = this#_set_selected selected
-let setText this text = this#_set_text text
+let setDisabled_string this disabled = this#_set_disabled_string_ disabled
+let setMultiple this multiple = this#_set_multiple multiple
+let setName this name = this#_set_name name
+let setSelectedIndex this index = this#_set_selectedIndex index
+let setSize this size = this#_set_size size
+let setType this type_ = this#_set_type type_
 let setValue this value = this#_set_value value

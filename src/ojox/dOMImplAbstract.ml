@@ -223,7 +223,8 @@ let scrollIntoView elem = <:stmt<
   }
 >>
 
-let selectAdd select option before = select#add option before
+let selectAdd select ?before option =
+  select#add option (Ocamljs.nullable_of_option before)
 
 let selectClear select = <:stmt< $select$.options.length = 0; >>
 

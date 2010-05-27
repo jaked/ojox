@@ -74,6 +74,19 @@ val createBlurEvent : document -> nativeEvent
 val createBRElement : document -> bRElement
 
 (**
+   Creates a &lt;button&gt; element.
+
+   <b>Warning!</b> The button type is actually implementation-dependent and is
+   read-only.
+   
+   @return the newly created element
+   @deprecated use {@link #createPushButtonElement()},
+               {@link #createResetButtonElement()} or
+               {@link #createSubmitButtonElement()} instead.
+*)
+val createButtonElement : document -> buttonElement
+
+(**
    Creates an &lt;input type='button'&gt; element.
    
    @return the newly created element

@@ -29,6 +29,7 @@ let createAreaElement this = createElement this AreaElement.tAG
 let createBaseElement this = createElement this BaseElement.tAG
 let createBlockQuoteElement this = createElement this QuoteElement.tAG_BLOCKQUOTE
 let createBRElement this = createElement this BRElement.tAG
+let createButtonElement this = createElement this ButtonElement.tAG
 let createButtonInputElement this = DOMImpl.createInputElement this "button"
 let createCaptionElement this = createElement this TableCaptionElement.tAG
 let createCheckInputElement this = DOMImpl.createInputElement this "checkbox"

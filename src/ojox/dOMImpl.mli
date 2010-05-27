@@ -81,7 +81,7 @@ val imgGetSrc : imageElement -> string
 val imgSetSrc : imageElement -> string -> unit
 val isOrHasChild : #node -> #node -> bool
 val scrollIntoView : #element -> unit
-val selectAdd : selectElement -> optionElement -> optionElement -> unit
+val selectAdd : selectElement -> ?before:optionElement -> optionElement -> unit
 val selectClear : selectElement -> unit
 val selectGetLength : selectElement -> int
 val selectGetOptions : selectElement -> optionElement array

@@ -124,6 +124,8 @@ end
 class type anchorElement =
 object
   inherit element
+
+  method _get_accessKey : string
 end
 
 class type areaElement =
@@ -228,8 +230,16 @@ class type imageElement =
 object
   inherit element
 
+  method _get_alt : string
+  method _get_height : int
   method _get_src : string
+  method _get_width : int
+  method _set_alt : string -> unit
+  method _set_height : int -> unit
+  method _set_isMap : bool -> unit
   method _set_src : string -> unit
+  method _set_useMap : bool -> unit
+  method _set_width : int -> unit
 end
 
 class type inputElement =
@@ -288,6 +298,18 @@ end
 class type optionElement =
 object
   inherit element
+
+  method _get_form : formElement
+  method _get_index : int
+  method _get_label : string
+  method _get_text : string
+  method _get_value : string
+  method _set_defaultSelected : bool -> unit
+  method _set_disabled : bool -> unit
+  method _set_label : string -> unit
+  method _set_selected : bool -> unit
+  method _set_text : string -> unit
+  method _set_value : string -> unit
 end
 
 class type optGroupElement =
@@ -334,7 +356,7 @@ object
   inherit element
 
   method add : optionElement -> optionElement -> unit
-  method _get_disabled : bool
+  method _get_disabled : string
   method _get_form : formElement
   method _get_multiple : string
   method _get_name : string
@@ -345,7 +367,7 @@ object
   method _get_value : string
   method remove : int -> unit
   method _set_disabled : bool -> unit
-  method _set_disabled_string : string -> unit
+  method _set_disabled_string_ : string -> unit
   method _set_multiple : bool -> unit
   method _set_name : string -> unit
   method _set_selectedIndex : int -> unit

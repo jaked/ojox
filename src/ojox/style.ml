@@ -23,8 +23,10 @@ let assertCamelCase name =
   if JavaString.contains name "-"
   then failwith ("The style name '" ^ name ^ "' should be in camelCase format")
 
-let setPropertyImpl this name value = <:stmt< $this$[$name$] = $value$; >>
+let getProperty this name =
+  assertCamelCase name;
+  << $this$[$name$] >>
 
 let setProperty this name value =
   assertCamelCase name;
-  setPropertyImpl this name value
+  <:stmt< $this$[$name$] = $value$; >>

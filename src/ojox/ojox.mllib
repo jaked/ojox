@@ -2,9 +2,11 @@ AnchorElement
 AreaElement
 BaseElement
 BRElement
+ButtonElement
 DivElement
 DListElement
 Document
+DOM
 DOMImplAbstract
 DOMImplStandard
 DOMImplSafari
@@ -16,6 +18,7 @@ DOMImplSafari_
 DOMImpl_
 DOMTypes_
 Element
+Event
 FieldSetElement
 FormElement
 FrameElement
@@ -35,6 +38,7 @@ MapElement
 MetaElement
 ModElement
 NativeEvent
+NativePreviewEvent
 Node
 ObjectElement
 OjoxEvent
@@ -46,6 +50,7 @@ ParamElement
 PreElement
 QuoteElement
 ScriptElement
+SelectElement
 SpanElement
 StyleElement
 Style

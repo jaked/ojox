@@ -1,7 +1,7 @@
 (*
  * This file is part of ojox, a library for web browser programming
  * Copyright (C) 2009 Jacob Donham
- * Original file (user/src/com/google/gwt/dom/client/Style.java
+ * Original file (user/src/com/google/gwt/user/client/Event.java
  * in the GWT source distribution) is Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -17,24 +17,26 @@
  * the License.
  *)
 
-open DOMTypes
-
-(**
-   Provides programmatic access to properties of the style object.
-   
-   Note that if a property or value is not explicitly enumerated in this
-   class, you can still access it via {!#getProperty(String)},
-   and {!setProperty(String, String)}.
-   
-   See {!Element.getStyle()}
-*)
-
-(**
-   Gets the value of a named property.
-*)
-val getProperty : style -> string -> string
-
-(**
-   Sets the value of a named property.
-*)
-val setProperty : style -> string -> string -> unit
+let oNBLUR = 0x01000
+let oNCHANGE = 0x00400
+let oNCLICK = 0x00001
+let oNDBLCLICK = 0x00002
+let oNERROR = 0x10000
+let oNFOCUS = 0x00800
+let oNKEYDOWN = 0x00080
+let oNKEYPRESS = 0x00100
+let oNKEYUP = 0x00200
+let oNLOAD = 0x08000
+let oNLOSECAPTURE = 0x02000
+let oNMOUSEDOWN = 0x00004
+let oNMOUSEMOVE = 0x00040
+let oNMOUSEOUT = 0x00020
+let oNMOUSEOVER = 0x00010
+let oNMOUSEUP = 0x00008
+let oNMOUSEWHEEL = 0x20000
+let oNPASTE = 0x80000
+let oNSCROLL = 0x04000
+let oNCONTEXTMENU = 0x40000
+let fOCUSEVENTS = oNFOCUS lor oNBLUR
+let kEYEVENTS = oNKEYDOWN lor oNKEYPRESS lor oNKEYUP
+let mOUSEEVENTS = oNMOUSEDOWN lor oNMOUSEUP lor oNMOUSEMOVE lor oNMOUSEOVER lor oNMOUSEOUT

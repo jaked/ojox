@@ -31,6 +31,7 @@ val eventGetTypeInt_string : string -> int
 val eventSetKeyCode : event -> char -> unit
 val getChild : #element -> int -> #element
 val getChildCount : #element -> int
+val getChildIndex : #element -> #element -> int
 val getEventListener : #element -> eventListener
 val getEventsSunk : #element -> int
 val insertChild : #element -> #element -> int -> unit

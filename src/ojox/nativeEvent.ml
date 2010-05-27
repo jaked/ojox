@@ -18,5 +18,24 @@
  *)
 
 let bUTTON_LEFT = 1
+let bUTTON_MIDDLE = 4
+let bUTTON_RIGHT = 2
 
-
+let getAltKey = DOMImpl.eventGetAltKey
+let getButton = DOMImpl.eventGetButton
+let getClientX = DOMImpl.eventGetClientX
+let getClientY = DOMImpl.eventGetClientY
+let getCtrlKey = DOMImpl.eventGetCtrlKey
+let getCurrentEventTarget = DOMImpl.eventGetCurrentTarget
+let getEventTarget = DOMImpl.eventGetTarget
+let getKeyCode = DOMImpl.eventGetKeyCode
+let getMetaKey = DOMImpl.eventGetMetaKey
+let getMouseWheelVelocityY = DOMImpl.eventGetMouseWheelVelocityY
+let getRelatedEventTarget = DOMImpl.eventGetRelatedTarget
+let getScreenX = DOMImpl.eventGetScreenX
+let getScreenY = DOMImpl.eventGetScreenY
+let getShiftKey = DOMImpl.eventGetShiftKey
+let getString = DOMImpl.eventToString
+let getType = DOMImpl.eventGetType
+let preventDefault = DOMImpl.eventPreventDefault
+let stopPropagation = DOMImpl.eventStopPropagation

@@ -1,7 +1,7 @@
 (*
  * This file is part of ojox, a library for web browser programming
  * Copyright (C) 2009 Jacob Donham
- * Original file (user/src/com/google/gwt/dom/client/Style.java
+ * Original file (user/src/com/google/gwt/user/client/Event.java
  * in the GWT source distribution) is Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -19,22 +19,4 @@
 
 open DOMTypes
 
-(**
-   Provides programmatic access to properties of the style object.
-   
-   Note that if a property or value is not explicitly enumerated in this
-   class, you can still access it via {!#getProperty(String)},
-   and {!setProperty(String, String)}.
-   
-   See {!Element.getStyle()}
-*)
-
-(**
-   Gets the value of a named property.
-*)
-val getProperty : style -> string -> string
-
-(**
-   Sets the value of a named property.
-*)
-val setProperty : style -> string -> string -> unit
+val fireNativePreviewEvent : nativeEvent -> bool
