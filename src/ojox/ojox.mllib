@@ -10,6 +10,11 @@ DOMImplStandard
 DOMImplSafari
 DOMImpl
 DOMTypes
+DOMImplAbstract_
+DOMImplStandard_
+DOMImplSafari_
+DOMImpl_
+DOMTypes_
 Element
 FieldSetElement
 FormElement

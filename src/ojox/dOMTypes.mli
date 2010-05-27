@@ -33,12 +33,14 @@ object
   method initEvent : string -> bool -> bool -> unit
   method initKeyEvent : 'a. string -> bool -> bool -> 'a -> bool -> bool -> bool -> bool -> int -> int -> unit
   method initMouseEvent : 'a 'b. string -> bool -> bool -> 'a -> int -> int -> int -> int -> int -> bool -> bool -> bool -> bool -> int -> 'b -> unit
+  method _get_cancelBubble : bool
   method _get_currentTarget : eventTarget
   method _get_relatedTarget : eventTarget
   method _get_target : eventTarget
   method _get_type : string
   method preventDefault : unit
   method _set_altKey : bool -> unit
+  method _set_cancelBubble : bool -> unit
   method _set_charCode : char -> unit
   method _set_charCode_int : int -> unit
   method _set_ctrlKey : bool -> unit
