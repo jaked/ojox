@@ -17,4 +17,13 @@
  * the License.
  *)
 
+class c =
+  let tag = new OjoxEvent.tag in
+object (_ : 'self)
+  inherit ['self] OjoxEvent.c
+  method getAssociatedType = tag
+end
+
+let addNativePreviewHandler _ = ignore
+
 let fireNativePreviewEvent _ = true

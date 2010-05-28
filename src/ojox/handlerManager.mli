@@ -22,6 +22,8 @@
    handlers on passed in events.
  *)
 
+type handlerRegistration = unit -> unit
+
 (**
    Creates a handler manager with the given source, specifying the order in
    which handlers are fired.
@@ -40,7 +42,7 @@ object
      @return the handler registration, can be stored in order to remove the
              handler later
    *)
-  method addHandler : ('a #OjoxEvent.c as 'a) OjoxEvent.tag -> ('a -> unit) -> (unit -> unit)
+  method addHandler : ('a #OjoxEvent.c as 'a) OjoxEvent.tag -> ('a -> unit) -> handlerRegistration
 
   (**
      Fires the given event to the handlers listening to the event's type.

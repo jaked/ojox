@@ -40,3 +40,15 @@ let oNCONTEXTMENU = 0x40000
 let fOCUSEVENTS = oNFOCUS lor oNBLUR
 let kEYEVENTS = oNKEYDOWN lor oNKEYPRESS lor oNKEYUP
 let mOUSEEVENTS = oNMOUSEDOWN lor oNMOUSEUP lor oNMOUSEMOVE lor oNMOUSEOVER lor oNMOUSEOUT
+
+let addNativePreviewHandler = NativePreviewEvent.addNativePreviewHandler
+let fireNativePreviewEvent = NativePreviewEvent.fireNativePreviewEvent
+let getCurrentEvent = DOM.eventGetCurrentEvent
+let getEventListener = DOM.getEventListener
+let getEventsSunk = DOM.getEventsSunk
+let getTypeInt_string = DOMImpl_.eventGetTypeInt_string
+let releaseCapture = DOM.releaseCapture
+let setCapture = DOM.setCapture
+let setEventListener = DOM.setEventListener
+let sinkEvents = DOM.sinkEvents
+let getTypeInt = DOM.eventGetType

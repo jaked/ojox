@@ -160,7 +160,7 @@ let dispatchEventImpl evt elem listener =
   if elem = !sCaptureElem 
   then
     (* ... and it's losing capture, clear sCaptureElem. *)
-    if eventGetType evt = Event.oNLOSECAPTURE
+    if eventGetType evt = 0x02000 (* Event.oNLOSECAPTURE *)
     then sCaptureElem := << null >>;
 
   (* Pass the event to the listener. *)

@@ -19,4 +19,12 @@
 
 open DOMTypes
 
+class c :
+object ('self)
+  inherit ['self] OjoxEvent.c
+  method getAssociatedType : 'self OjoxEvent.tag
+end
+
+val addNativePreviewHandler : (c -> unit) -> HandlerManager.handlerRegistration
+
 val fireNativePreviewEvent : nativeEvent -> bool

@@ -17,6 +17,8 @@
  * the License.
  *)
 
+type handlerRegistration = unit -> unit
+
 class handlerRegistry =
 object (self)
   val map = Hashtbl.create 17
@@ -62,7 +64,7 @@ object
   val registry = new handlerRegistry
   val mutable deferredDeltas = []
 
-  method addHandler : 'a. (('a)#OjoxEvent.c as 'a) OjoxEvent.tag -> ('a -> unit) -> (unit -> unit) = fun tag handler ->
+  method addHandler : 'a. (('a)#OjoxEvent.c as 'a) OjoxEvent.tag -> ('a -> unit) -> handlerRegistration = fun tag handler ->
     if firingDepth > 0
     then deferredDeltas <- (fun () -> registry#addHandler tag handler)::deferredDeltas
     else registry#addHandler tag handler;
