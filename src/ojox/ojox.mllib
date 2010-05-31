@@ -62,4 +62,5 @@ TableRowElement
 TableSectionElement
 TextAreaElement
 TitleElement
+UIObject
 UListElement
