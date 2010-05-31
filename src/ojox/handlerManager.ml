@@ -24,17 +24,17 @@ class handlerRegistry =
 object (self)
   val map = Hashtbl.create 17
 
-  method find : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler list = fun tag ->
+  method find : 'a. 'a OjoxEvent.tag -> 'a handler list = fun tag ->
     Hashtbl.find (Obj.magic map : (_ OjoxEvent.tag, (_ -> unit) list) Hashtbl.t) tag
 
-  method replace : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler list -> unit = fun tag handlers ->
+  method replace : 'a. 'a OjoxEvent.tag -> 'a handler list -> unit = fun tag handlers ->
     Hashtbl.replace (Obj.magic map : (_ OjoxEvent.tag, (_ -> unit) list) Hashtbl.t) tag handlers
 
-  method get : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler list = fun tag ->
+  method get : 'a. 'a OjoxEvent.tag -> 'a handler list = fun tag ->
     try self#find tag
     with Not_found -> []
 
-  method addHandler : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler -> unit = fun tag handler ->
+  method addHandler : 'a. 'a OjoxEvent.tag -> 'a handler -> unit = fun tag handler ->
     let l = self#get tag in
     self#replace tag (handler::l)
 
@@ -44,16 +44,16 @@ object (self)
     let l = if isReverseOrder then l else List.rev l in
     List.iter (fun h -> h event) l
 
-  method getHandler : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> int -> 'a handler = fun tag n ->
+  method getHandler : 'a. 'a OjoxEvent.tag -> int -> 'a handler = fun tag n ->
     List.nth (self#get tag) n
 
-  method getHandlerCount : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> int = fun tag ->
+  method getHandlerCount : 'a. 'a OjoxEvent.tag -> int = fun tag ->
     List.length (self#get tag)
 
-  method isEventHandled : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> bool = fun tag ->
+  method isEventHandled : 'a. 'a OjoxEvent.tag -> bool = fun tag ->
     self#get tag <> []
 
-  method removeHandler : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler -> unit = fun tag handler ->
+  method removeHandler : 'a. 'a OjoxEvent.tag -> 'a handler -> unit = fun tag handler ->
     match self#get tag with
       | [] -> ()
       | l -> self#replace tag (List.filter (fun h -> not (h == handler)) l)
@@ -65,7 +65,7 @@ object
   val registry = new handlerRegistry
   val mutable deferredDeltas = []
 
-  method addHandler : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler -> handlerRegistration = fun tag handler ->
+  method addHandler : 'a. 'a OjoxEvent.tag -> 'a handler -> handlerRegistration = fun tag handler ->
     if firingDepth > 0
     then deferredDeltas <- (fun () -> registry#addHandler tag handler)::deferredDeltas
     else registry#addHandler tag handler;
@@ -98,12 +98,12 @@ object
       | None -> event#kill
       | Some s -> event#setSource s
 
-  method getHandler : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> int -> 'a handler = fun tag n ->
+  method getHandler : 'a. 'a OjoxEvent.tag -> int -> 'a handler = fun tag n ->
     registry#getHandler tag n
 
-  method getHandlerCount : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> int = fun tag ->
+  method getHandlerCount : 'a. 'a OjoxEvent.tag -> int = fun tag ->
     registry#getHandlerCount tag
 
-  method isEventHandled : 'a. (#OjoxEvent.c as 'a) OjoxEvent.tag -> bool = fun tag ->
+  method isEventHandled : 'a. 'a OjoxEvent.tag -> bool = fun tag ->
     registry#isEventHandled tag
 end

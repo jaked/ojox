@@ -43,7 +43,7 @@ object
      @return the handler registration, can be stored in order to remove the
              handler later
    *)
-  method addHandler : (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler -> handlerRegistration
+  method addHandler : 'a OjoxEvent.tag -> 'a handler -> handlerRegistration
 
   (**
      Fires the given event to the handlers listening to the event's type.
@@ -64,7 +64,7 @@ object
      @param type the handler's event type
      @return the given handler
    *)
-  method getHandler : (#OjoxEvent.c as 'a) OjoxEvent.tag -> int -> 'a handler
+  method getHandler : 'a OjoxEvent.tag -> int -> 'a handler
 
   (**
      Gets the number of handlers listening to the event type.
@@ -72,7 +72,7 @@ object
      @param type the event type
      @return the number of registered handlers
    *)
-  method getHandlerCount : #OjoxEvent.c OjoxEvent.tag -> int
+  method getHandlerCount : 'a OjoxEvent.tag -> int
 
   (**
      Does this handler manager handle the given event type?
@@ -80,5 +80,5 @@ object
      @param e the event type
      @return whether the given event type is handled
    *)
-  method isEventHandled : #OjoxEvent.c OjoxEvent.tag -> bool
+  method isEventHandled : 'a OjoxEvent.tag -> bool
 end
