@@ -21,12 +21,12 @@ class ['a] tag =
 object
 end
 
-class virtual ['a] c =
-object (self)
+class virtual c =
+object (self : 'self)
   val mutable dead = false
   val mutable source = (None : < > option)
 
-  method virtual getAssociatedType : 'a tag
+  method virtual getAssociatedType : 'self tag
 
   method getSource =
     self#assertLive;

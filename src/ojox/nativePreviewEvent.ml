@@ -19,8 +19,8 @@
 
 class c =
   let tag = new OjoxEvent.tag in
-object (_ : 'self)
-  inherit ['self] OjoxEvent.c
+object
+  inherit OjoxEvent.c
   method getAssociatedType = tag
 end
 

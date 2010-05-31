@@ -23,6 +23,7 @@
  *)
 
 type handlerRegistration = unit -> unit
+type 'a handler = 'a -> unit
 
 (**
    Creates a handler manager with the given source, specifying the order in
@@ -42,7 +43,7 @@ object
      @return the handler registration, can be stored in order to remove the
              handler later
    *)
-  method addHandler : ('a #OjoxEvent.c as 'a) OjoxEvent.tag -> ('a -> unit) -> handlerRegistration
+  method addHandler : (#OjoxEvent.c as 'a) OjoxEvent.tag -> 'a handler -> handlerRegistration
 
   (**
      Fires the given event to the handlers listening to the event's type.
@@ -53,7 +54,7 @@ object
     
      @param event the event
    *)
-  method fireEvent : ('a #OjoxEvent.c as 'a) -> unit
+  method fireEvent : #OjoxEvent.c -> unit
 
   (**
      Gets the handler at the given index.
@@ -63,7 +64,7 @@ object
      @param type the handler's event type
      @return the given handler
    *)
-  method getHandler : ('a #OjoxEvent.c as 'a) OjoxEvent.tag -> int -> 'a -> unit
+  method getHandler : (#OjoxEvent.c as 'a) OjoxEvent.tag -> int -> 'a handler
 
   (**
      Gets the number of handlers listening to the event type.
@@ -71,7 +72,7 @@ object
      @param type the event type
      @return the number of registered handlers
    *)
-  method getHandlerCount : ('a #OjoxEvent.c as 'a) OjoxEvent.tag -> int
+  method getHandlerCount : #OjoxEvent.c OjoxEvent.tag -> int
 
   (**
      Does this handler manager handle the given event type?
@@ -79,5 +80,5 @@ object
      @param e the event type
      @return whether the given event type is handled
    *)
-  method isEventHandled : ('a #OjoxEvent.c as 'a) OjoxEvent.tag -> bool
+  method isEventHandled : #OjoxEvent.c OjoxEvent.tag -> bool
 end

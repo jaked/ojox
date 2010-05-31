@@ -21,7 +21,7 @@ open DOMTypes
 
 class c :
 object ('self)
-  inherit ['self] OjoxEvent.c
+  inherit OjoxEvent.c
   method getAssociatedType : 'self OjoxEvent.tag
 end
 

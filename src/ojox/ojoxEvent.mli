@@ -38,8 +38,8 @@ end
   
    @param 'a handler type
 *)
-class virtual ['a] c :
-object
+class virtual c :
+object ('self)
 
   (**
      Returns the type used to register this event. Used by handler manager to
@@ -47,7 +47,7 @@ object
     
      @return the type
    *)
-  method virtual getAssociatedType : 'a tag
+  method virtual getAssociatedType : 'self tag
 
   (**
      Returns the source that last fired this event.
