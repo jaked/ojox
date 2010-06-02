@@ -32,7 +32,7 @@ type 'a handler = 'a -> unit
    @param source the event source
    @param fireInReverseOrder true to fire handlers in reverse order
  *)
-class c : ?isReverseOrder:bool -> <  > ->
+class c : ?isReverseOrder:bool -> < .. > ->
 object
   (**
      Adds a handle.

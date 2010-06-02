@@ -6,6 +6,7 @@ ButtonElement
 DivElement
 DListElement
 Document
+DomEvent
 DOM
 DOMImplAbstract
 DOMImplStandard
@@ -64,3 +65,5 @@ TextAreaElement
 TitleElement
 UIObject
 UListElement
+Widget
+

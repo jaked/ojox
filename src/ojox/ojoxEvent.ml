@@ -28,11 +28,11 @@ object (self : 'self)
 
   method virtual getAssociatedType : 'self tag
 
-  method getSource =
+  method getSource : 'a. (< .. > as 'a) =
     self#assertLive;
     match source with
       | None -> raise Not_found
-      | Some s -> s
+      | Some s -> (Obj.magic s)
 
   method assertLive = assert (not dead)
 
@@ -48,6 +48,6 @@ object (self : 'self)
     dead <- false;
     source <- None
 
-  method setSource s =
-    source <- Some s
+  method setSource : 'a. (< .. > as 'a) -> unit = fun s ->
+    source <- Some (Obj.magic s)
 end

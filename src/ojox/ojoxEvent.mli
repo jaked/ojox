@@ -54,7 +54,7 @@ object ('self)
     
      @return object representing the source of this event
    *)
-  method getSource : < >
+  method getSource : 'a. (< .. > as 'a)
 
   (**
      Asserts that the event still should be accessed. All events are considered
@@ -87,5 +87,5 @@ object ('self)
      @param source the source of this event, should only be set by a
               {!HandlerManager}
    *)
-  method setSource : < > -> unit
+  method setSource : 'a. (< .. > as 'a) -> unit
 end
