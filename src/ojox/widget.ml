@@ -19,11 +19,18 @@
 
 open Ocamljs.Inline
 
+class type ['a] iterator =
+object
+  method hasNext : bool
+  method next : 'a
+  method remove : unit
+end
+
 class type ['a] hasWidgets =
 object
   method add : 'a -> unit
   method clear : unit
-  (* method iterator : 'a iterator *)
+  method iterator : 'a iterator
   method remove : 'a -> bool
 end
 
@@ -41,7 +48,7 @@ object (self : 'self)
   val mutable eventsToSink = 0
   val mutable attached = false
   (* val mutable layoutData = ? *)
-  val mutable parent = (<< null >> : 'self)
+  val mutable parent = (<< null >> : c)
   val mutable handlerManager = (<< null >> : HandlerManager.c)
 
   method fireEvent : 'a. (#OjoxEvent.c as 'a) -> unit = fun event ->
@@ -84,7 +91,7 @@ object (self : 'self)
       ()
     end else begin
       match parent#instanceof_hasWidgets with
-        | Some hasWidgets -> ignore (hasWidgets#remove self)
+        | Some hasWidgets -> ignore (hasWidgets#remove (self :> c))
         | None -> failwith "This widget's parent does not implement HasWidgets"
     end
 
@@ -104,7 +111,8 @@ object (self : 'self)
     fun handler type_ ->
       self#ensureHandlers#addHandler type_ handler
 
-  method delegateEvent : 'a. 'self -> (#OjoxEvent.c as 'a) -> unit = fun target event -> target#fireEvent event
+  method delegateEvent : 'a 'b. (< fireEvent: 'c. (#OjoxEvent.c as 'c) -> unit; .. > as 'b) -> (#OjoxEvent.c as 'a) -> unit =
+    fun target event -> target#fireEvent event
 
   method doAttachChildren = ()
 
@@ -211,5 +219,5 @@ object (self : 'self)
       end
     end
 
-  method instanceof_hasWidgets : 'self hasWidgets option = None
+  method instanceof_hasWidgets : c hasWidgets option = None
 end

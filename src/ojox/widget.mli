@@ -19,11 +19,18 @@
 
 open DOMTypes_
 
+class type ['a] iterator =
+object
+  method hasNext : bool
+  method next : 'a
+  method remove : unit
+end
+
 class type ['a] hasWidgets =
 object
   method add : 'a -> unit
   method clear : unit
-  (* method iterator : 'a iterator *)
+  method iterator : 'a iterator
   method remove : 'a -> bool
 end
 
@@ -34,7 +41,7 @@ end
  *)
 
 class c :
-object ('self)
+object
   inherit UIObject.c
 
   method fireEvent : #OjoxEvent.c -> unit
@@ -52,7 +59,7 @@ object ('self)
      
      @return the widget's parent panel
    *)
-  method getParent : 'self
+  method getParent : c
   
   (**
      Determines whether this widget is currently attached to the browser's
@@ -139,7 +146,7 @@ object ('self)
      @param event the event
      @param target fire the event on the given target
    *)
-  method delegateEvent : 'a. 'self -> (#OjoxEvent.c as 'a) -> unit
+  method delegateEvent : 'a 'b. (< fireEvent: 'c. (#OjoxEvent.c as 'c) -> unit; .. > as 'b) -> (#OjoxEvent.c as 'a) -> unit
 
   (**
      If a widget contains one or more child widgets that are not in the logical
@@ -244,7 +251,7 @@ object ('self)
      @throws IllegalStateException if <code>parent</code> is non-null and the
                widget already has a parent
   *)
-  method setParent : 'self -> unit
+  method setParent : c -> unit
 
-  method instanceof_hasWidgets : 'self hasWidgets option
+  method instanceof_hasWidgets : c hasWidgets option
 end
