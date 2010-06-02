@@ -23,7 +23,7 @@ let attachCommand w = w#onAttach
 
 let detachCommand w = w#onDetach
 
-let tryCommand : Widget.c #Widget.hasWidgets -> (Widget.c -> unit) -> unit = fun hasWidgets c ->
+let tryCommand : #Widget.hasWidgets -> (Widget.c -> unit) -> unit = fun hasWidgets c ->
   let caught = ref [] in
   let it = hasWidgets#iterator in
   while it#hasNext do

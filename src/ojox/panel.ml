@@ -50,8 +50,8 @@ object (self)
     assert (child#getParent = (self :> Widget.c));
     child#setParent << null >>
 
-  method virtual iterator : Widget.c Widget.iterator
+  method virtual iterator : Widget.iterator
   method virtual remove : Widget.c -> bool
 
-  method instanceof_hasWidgets = Some (self :> Widget.c Widget.hasWidgets)
+  method instanceof_hasWidgets = Some (self :> Widget.hasWidgets)
 end

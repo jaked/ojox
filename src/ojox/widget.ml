@@ -19,18 +19,18 @@
 
 open Ocamljs.Inline
 
-class type ['a] iterator =
+class type ['a] iterator_ =
 object
   method hasNext : bool
   method next : 'a
   method remove : unit
 end
 
-class type ['a] hasWidgets =
+class type ['a] hasWidgets_ =
 object
   method add : 'a -> unit
   method clear : unit
-  method iterator : 'a iterator
+  method iterator : 'a iterator_
   method remove : 'a -> bool
 end
 
@@ -219,5 +219,8 @@ object (self : 'self)
       end
     end
 
-  method instanceof_hasWidgets : c hasWidgets option = None
+  method instanceof_hasWidgets : c hasWidgets_ option = None
 end
+
+class type iterator = object inherit [c] iterator_ end
+class type hasWidgets = object inherit [c] hasWidgets_ end

@@ -49,4 +49,4 @@ val detachCommand : Widget.c -> unit
    @param hasWidgets children to iterate
    @param c the {@link Command} to try on all children
 *)
-val tryCommand : Widget.c #Widget.hasWidgets -> (Widget.c -> unit) -> unit
+val tryCommand : #Widget.hasWidgets -> (Widget.c -> unit) -> unit

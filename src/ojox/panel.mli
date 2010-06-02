@@ -146,5 +146,5 @@ object
    *)
   method orphan : #Widget.c -> unit
 
-  method virtual iterator : Widget.c Widget.iterator
+  method virtual iterator : Widget.iterator
 end

@@ -19,18 +19,18 @@
 
 open DOMTypes_
 
-class type ['a] iterator =
+class type ['a] iterator_ =
 object
   method hasNext : bool
   method next : 'a
   method remove : unit
 end
 
-class type ['a] hasWidgets =
+class type ['a] hasWidgets_ =
 object
   method add : 'a -> unit
   method clear : unit
-  method iterator : 'a iterator
+  method iterator : 'a iterator_
   method remove : 'a -> bool
 end
 
@@ -253,5 +253,9 @@ object
   *)
   method setParent : c -> unit
 
-  method instanceof_hasWidgets : c hasWidgets option
+  method instanceof_hasWidgets : c hasWidgets_ option
 end
+
+class type iterator = object inherit [c] iterator_ end
+class type hasWidgets = object inherit [c] hasWidgets_ end
+
