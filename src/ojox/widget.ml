@@ -195,17 +195,21 @@ object (self : 'self)
     let oldParent = parent in
     if Ocamljs.is_null parent'
     then
-      try
-        if not (Ocamljs.is_null oldParent) && oldParent#isAttached
-        then begin
-          self#onDetach;
-          if self#isAttached
-          then failwith "Failure to call super.onDetach()";
-        end
-      with e ->
-        (* Put this in a finally in case onDetach throws an exception. *)
-        parent <- << null >>;
-        raise e
+      let e =
+        try
+          if not (Ocamljs.is_null oldParent) && oldParent#isAttached
+          then begin
+            self#onDetach;
+            if self#isAttached
+            then failwith "Failure to call super.onDetach()";
+          end;
+          None
+        with e -> Some e in
+      (* Put this in a finally in case onDetach throws an exception. *)
+      parent <- << null >>;
+      match e with
+        | None -> ()
+        | Some e -> raise e
     else begin
       if not (Ocamljs.is_null oldParent)
       then failwith "Cannot set a new parent without first clearing the old parent";

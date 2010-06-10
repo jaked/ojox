@@ -36,7 +36,7 @@
    @param parent the container whose {@link HasWidgets#remove(Widget)} will be
             delegated to by the iterator's {@link Iterator#remove()} method.
 *)
-class c : Widget.hasWidgets ->
+class c : #Widget.hasWidgets ->
 object
   (**
      Adds a widget to the end of this collection.
@@ -95,7 +95,7 @@ object
      @param index the index of the widget to be removed
      @throws IndexOutOfBoundsException if <code>index</code> is out of range
    *)
-  method remove : int -> unit
+  method remove_index : int -> unit
 
   (**
      Removes the specified widget.
@@ -103,7 +103,7 @@ object
      @param w the widget to be removed
      @throws NoSuchElementException if the widget is not present
    *)
-  method remove_widget : Widget.c -> unit
+  method remove : Widget.c -> unit
 
   (**
      Gets the number of widgets in this collection.

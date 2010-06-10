@@ -19,7 +19,7 @@
 
 open Ocamljs.Inline
 
-class c (parent : Widget.hasWidgets) =
+class c (parent : #Widget.hasWidgets) =
 object (self)
   val mutable array = (Array.make 4 << null >> : Widget.c array)
   val mutable size = 0
@@ -86,7 +86,7 @@ object (self)
       index <- index -1
   end
 
-  method remove index =
+  method remove_index index =
     if index < 0 || index >= size
     then invalid_arg "WidgetCollection.remove";
 
@@ -98,8 +98,8 @@ object (self)
 
     array.(size) <- << null >>
 
-  method remove_widget w =
+  method remove w =
     let index = self#indexOf w in
     if index = -1 then raise Not_found;
-    self#remove index
+    self#remove_index index
 end

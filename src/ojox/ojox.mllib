@@ -4,6 +4,7 @@ AttachDetachException
 BaseElement
 BRElement
 ButtonElement
+ComplexPanel
 DivElement
 DListElement
 Document

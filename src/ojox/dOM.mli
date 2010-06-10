@@ -643,7 +643,7 @@ val insertBefore : element -> element -> element -> unit
             greater than the number of existing children will cause the child
             to be appended)
 *)
-val insertChild : element -> element -> int -> unit
+val insertChild : #element -> #element -> int -> unit
 
 (**
    Creates an <code>&lt;option&gt;</code> element and inserts it as a child of
