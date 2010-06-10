@@ -23,13 +23,10 @@ let attachCommand w = w#onAttach
 
 let detachCommand w = w#onDetach
 
-let tryCommand : #Widget.hasWidgets -> (Widget.c -> unit) -> unit = fun hasWidgets c ->
+let tryCommand widgets c =
   let caught = ref [] in
-  let it = hasWidgets#iterator in
-  while it#hasNext do
-    let w = it#next in
-    try c w
-    with e -> caught := e::!caught
-  done;
+  List.iter
+    (fun w -> try c w  with e -> caught := e::!caught)
+    widgets;
   if !caught != []
   then raise (AttachDetachException !caught)

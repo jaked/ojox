@@ -89,6 +89,8 @@ object
    *)
   method iterator : Widget.iterator
 
+  method list : Widget.c list
+
   (**
      Removes the widget at the specified index.
      

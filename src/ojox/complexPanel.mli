@@ -30,6 +30,7 @@ object
   method getWidgetCount : int
   method getWidgetIndex : Widget.c -> int
   method iterator : Widget.iterator
+  method list : Widget.c list
   method remove_index : int -> bool
   method remove : Widget.c -> bool
 

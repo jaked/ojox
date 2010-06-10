@@ -31,6 +31,7 @@ object
   method add : 'a -> unit
   method clear : unit
   method iterator : 'a iterator_
+  method list : 'a list
   method remove : 'a -> bool
 end
 
@@ -259,3 +260,6 @@ end
 class type iterator = object inherit [c] iterator_ end
 class type hasWidgets = object inherit [c] hasWidgets_ end
 
+val widgetsToDetach : (c, unit) Hashtbl.t
+val detachNow : c -> unit
+val isInDetachList : c -> bool

@@ -31,8 +31,26 @@ object
   method add : 'a -> unit
   method clear : unit
   method iterator : 'a iterator_
+  method list : 'a list
   method remove : 'a -> bool
 end
+
+(* stuff from RootPanel to avoid circular reference *)
+let widgetsToDetach = Hashtbl.create 17
+
+let detachNow widget =
+  if not (Hashtbl.mem widgetsToDetach widget)
+  then failwith "detachNow() called on a widget not currently in the detach list";
+  let e =
+    try widget#onDetach; None
+    with e -> Some e in
+  Hashtbl.remove widgetsToDetach widget;
+  match e with
+    | None -> ()
+    | Some e -> raise e
+
+let isInDetachList widget =
+  Hashtbl.mem widgetsToDetach widget
 
 class c =
 object (self : 'self)
@@ -82,13 +100,10 @@ object (self : 'self)
   method removeFromParent =
     if Ocamljs.is_null parent
     then begin
-      (* XXX need to put detach list somewhere else to avoid recursive reference
       (* If the widget had no parent, check to see if it was in the detach list
          and remove it if necessary. *)
-      if RootPanel.isInDetachList self
-      then RootPanel.detachNow self
-      *)
-      ()
+      if isInDetachList (self :> c)
+      then detachNow (self :> c)
     end else begin
       match parent#instanceof_hasWidgets with
         | Some hasWidgets -> ignore (hasWidgets#remove (self :> c))

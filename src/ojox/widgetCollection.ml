@@ -86,6 +86,8 @@ object (self)
       index <- index -1
   end
 
+  method list = Array.to_list (Array.sub array 0 size)
+
   method remove_index index =
     if index < 0 || index >= size
     then invalid_arg "WidgetCollection.remove";

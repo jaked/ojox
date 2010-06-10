@@ -37,10 +37,10 @@ object (self)
     child#setParent (self :> Widget.c)
 
   method doAttachChildren =
-    AttachDetachException.tryCommand self AttachDetachException.attachCommand
+    AttachDetachException.tryCommand self#list AttachDetachException.attachCommand
 
   method doDetachChildren =
-    AttachDetachException.tryCommand self AttachDetachException.detachCommand
+    AttachDetachException.tryCommand self#list AttachDetachException.detachCommand
 
   method onLoad = ()
 
@@ -51,6 +51,7 @@ object (self)
     child#setParent << null >>
 
   method virtual iterator : Widget.iterator
+  method virtual list : Widget.c list
   method virtual remove : Widget.c -> bool
 
   method instanceof_hasWidgets = Some (self :> Widget.hasWidgets)

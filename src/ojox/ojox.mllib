@@ -54,6 +54,7 @@ ParagraphElement
 ParamElement
 PreElement
 QuoteElement
+RootPanel
 ScriptElement
 SelectElement
 SpanElement

@@ -37,6 +37,7 @@ object (self)
   method getWidgetCount = self#getChildren#size
   method getWidgetIndex child = self#getChildren#indexOf child
   method iterator = self#getChildren#iterator
+  method list = self#getChildren#list
   method remove_index index = self#remove (self#getWidget index)
 
   method remove w =
@@ -123,7 +124,7 @@ object (self)
     if Ocamljs.is_null orphanCommand
     then orphanCommand <- self#orphan;
     let e =
-      try AttachDetachException.tryCommand self orphanCommand; None
+      try AttachDetachException.tryCommand children#list orphanCommand; None
       with e -> Some e in
     children <- new WidgetCollection.c self;
     match e with
