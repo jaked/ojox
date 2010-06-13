@@ -17,15 +17,4 @@
  * the License.
  *)
 
-open DOMTypes
-
-(**
-   Implementation interface for creating and manipulating focusable elements
-   that aren't naturally focusable in all browsers, such as DIVs.
-*)
-val blur : element -> unit
-val createFocusable : unit -> element
-val focus : element -> unit
-val getTabIndex : element -> int
-val setAccessKey : element -> char -> unit
-val setTabIndex : element -> int -> unit
+include FocusImplSafari

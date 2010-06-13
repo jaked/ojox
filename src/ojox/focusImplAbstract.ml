@@ -17,15 +17,19 @@
  * the License.
  *)
 
-open DOMTypes
+open Ocamljs.Inline
 
-(**
-   Implementation interface for creating and manipulating focusable elements
-   that aren't naturally focusable in all browsers, such as DIVs.
-*)
-val blur : element -> unit
-val createFocusable : unit -> element
-val focus : element -> unit
-val getTabIndex : element -> int
-val setAccessKey : element -> char -> unit
-val setTabIndex : element -> int -> unit
+let blur = Element.blur
+
+let createFocusable () =
+  let e = Document.createDivElement (Document.get ()) in
+  Element.setTabIndex e 0;
+  e
+
+let focus = Element.focus
+
+let getTabIndex = Element.getTabIndex
+
+let setAccessKey elem key = <:stmt< $elem$.accessKey = String.fromCharCode($key$); >>
+
+let setTabIndex = Element.setTabIndex

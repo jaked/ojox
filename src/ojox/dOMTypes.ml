@@ -117,6 +117,7 @@ object
   method _set_lang : string -> unit
   method _set_scrollLeft : int -> unit
   method _set_scrollTop : int -> unit
+  method _set_tabIndex : int -> unit
 end
 
 class type anchorElement =

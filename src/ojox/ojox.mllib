@@ -27,6 +27,11 @@ Element
 Event
 FieldSetElement
 FocusEvent
+FocusImplAbstract
+FocusImplForWidget
+FocusImplForPanel
+FocusImplSafari
+FocusImplStandard
 FocusWidget
 FormElement
 FrameElement

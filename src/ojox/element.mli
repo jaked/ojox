@@ -463,6 +463,13 @@ val setScrollLeft : #element -> int -> unit
 val setScrollTop : #element -> int -> unit
 
 (**
+   The index that represents the element's position in the tabbing order.
+   
+   @see <a href="http://www.w3.org/TR/1999/REC-html401-19991224/interact/forms.html#adef-tabindex">W3C HTML Specification</a>
+*)
+val setTabIndex : #element -> int -> unit
+
+(**
    The element's advisory title.
  *)
 val setTitle : #element -> string -> unit

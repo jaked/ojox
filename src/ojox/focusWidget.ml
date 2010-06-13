@@ -42,7 +42,7 @@ object (self)
   method addMouseUpHandler : MouseUpEvent.c handler -> handlerRegistration = fun handler -> self#addDomHandler handler MouseUpEvent.getType
   method addMouseWheelHandler : MouseWheelEvent.c handler -> handlerRegistration = fun handler -> self#addDomHandler handler MouseWheelEvent.getType
 
-  method getTabIndex = FocusImpl.getTabIndex self#getElement
+  method getTabIndex = FocusImplForWidget.getTabIndex self#getElement
   method isEnabled = not (DOM.getElementPropertyBoolean self#getElement "disabled")
 
   method setAccessKey (key : char) =
@@ -52,10 +52,10 @@ object (self)
 
   method setFocus focused =
     if focused
-    then FocusImpl.focus self#getElement
-    else FocusImpl.blur self#getElement
+    then FocusImplForWidget.focus self#getElement
+    else FocusImplForWidget.blur self#getElement
 
-  method setTabIndex index = FocusImpl.setTabIndex self#getElement index
+  method setTabIndex index = FocusImplForWidget.setTabIndex self#getElement index
 
   method setElement elem =
     super#setElement elem;
