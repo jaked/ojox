@@ -5,6 +5,8 @@ AttachDetachException
 BaseElement
 BlurEvent
 BRElement
+Button
+ButtonBase
 ButtonElement
 ClickEvent
 ComplexPanel

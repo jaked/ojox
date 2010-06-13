@@ -167,10 +167,26 @@ object
   method _set_title : string -> unit
 end
 
+class type formElement =
+object
+  inherit element
+end
+
 class type buttonElement =
 object
   inherit element
 
+  method _get_accessKey : string
+  method _get_disabled : string
+  method _get_form : formElement
+  method _get_name : string
+  method _get_type : string
+  method _get_value : string
+  method _set_accessKey : string -> unit
+  method _set_disabled : bool -> unit
+  method _set_disabled_string_ : string -> unit
+  method _set_name : string -> unit
+  method _set_value : string -> unit
   method _set_type : string -> unit
   method click : unit
 end
@@ -186,11 +202,6 @@ object
 end
 
 class type fieldSetElement =
-object
-  inherit element
-end
-
-class type formElement =
 object
   inherit element
 end
