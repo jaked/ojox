@@ -41,7 +41,7 @@
    
    @param elem the element to be used for this panel
  *)
-class c : ?elem:DOMTypes.element -> unit ->
+class c : ?elem:#DOMTypes.element -> unit ->
 object
   inherit ComplexPanel.c
 

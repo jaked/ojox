@@ -22,11 +22,14 @@ let changeToStaticPositioning elem =
   DOM.setStyleAttribute elem "top" "";
   DOM.setStyleAttribute elem "position" ""
 
-class c ?(elem = DOM.createDiv ()) () =
+class c ?(elem : #DOMTypes.element option) () =
 object (self)
   inherit ComplexPanel.c as super
 
   initializer
+    let elem = match elem with
+      | None -> DOM.createDiv ()
+      | Some elem -> (elem :> DOMTypes.element) in
     self#setElement elem;
 
     (* Setting the panel's position style to 'relative' causes it to be treated
