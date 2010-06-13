@@ -41,7 +41,7 @@ object
      @param child the child widget to be added
      @param container the element within which the child will be contained
    *)
-  method add2 : Widget.c -> #element -> unit
+  method add2 : #Widget.c -> #element -> unit
 
   (**
      Adjusts beforeIndex to account for the possibility that the given widget is

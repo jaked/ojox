@@ -28,7 +28,7 @@ object (self)
   method private parent = parent
   method size = size
 
-  method add w = self#insert w size
+  method add : 'a. (#Widget.c as 'a) -> unit = fun w -> self#insert (w :> Widget.c) size
   method contains w = self#indexOf w != -1
 
   method get index =

@@ -59,12 +59,12 @@ object (self)
         | None -> true
         | Some e -> raise e
 
-  method add2 : 'a. Widget.c -> (#element as 'a) -> unit = fun child container ->
+  method add2 : 'a 'b. (#Widget.c as 'a) -> (#element as 'b) -> unit = fun child container ->
     (* Detach new child. *)
     child#removeFromParent;
 
     (* Logical attach. *)
-    self#getChildren#add child;
+    (* self#getChildren#add child; *)
 
     (* Physical attach. *)
     DOM.appendChild container child#getElement;

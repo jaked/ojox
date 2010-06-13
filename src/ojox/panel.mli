@@ -61,7 +61,7 @@ object
                often this means that a specific overload must be called)
      @see HasWidgets#add(Widget)
    *)
-  method add : Widget.c -> unit
+  method add : #Widget.c -> unit
 
   method clear : unit
 

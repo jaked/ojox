@@ -23,7 +23,7 @@ class virtual c =
 object (self)
   inherit Widget.c
 
-  method add : Widget.c -> unit = fun child -> failwith "This panel does not support no-arg add()"
+  method add : 'a. (#Widget.c as 'a) -> unit = fun child -> failwith "This panel does not support no-arg add()"
 
   method clear =
     let it = self#iterator in
@@ -53,6 +53,4 @@ object (self)
   method virtual iterator : Widget.iterator
   method virtual list : Widget.c list
   method virtual remove : Widget.c -> bool
-
-  method instanceof_hasWidgets = Some (self :> Widget.hasWidgets)
 end

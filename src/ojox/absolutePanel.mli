@@ -45,7 +45,7 @@ class c : ?elem:#DOMTypes.element -> unit ->
 object
   inherit ComplexPanel.c
 
-  method add : Widget.c -> unit
+  method add : #Widget.c -> unit
 
   (**
      Adds a widget to the panel at the specified position. Setting a position of

@@ -19,22 +19,6 @@
 
 open DOMTypes_
 
-class type ['a] iterator_ =
-object
-  method hasNext : bool
-  method next : 'a
-  method remove : unit
-end
-
-class type ['a] hasWidgets_ =
-object
-  method add : 'a -> unit
-  method clear : unit
-  method iterator : 'a iterator_
-  method list : 'a list
-  method remove : 'a -> bool
-end
-
 (**
    The base class for the majority of user-interface objects. Widget adds
    support for receiving events from the browser and being added directly to
@@ -254,11 +238,25 @@ object
   *)
   method setParent : c -> unit
 
-  method instanceof_hasWidgets : c hasWidgets_ option
+  (** only implemented by widgets with children *)
+  method remove : c -> bool
 end
 
-class type iterator = object inherit [c] iterator_ end
-class type hasWidgets = object inherit [c] hasWidgets_ end
+class type iterator =
+object
+  method hasNext : bool
+  method next : c
+  method remove : unit
+end
+
+class type hasWidgets =
+object
+  method add : #c -> unit
+  method clear : unit
+  method iterator : iterator
+  method list : c list
+  method remove : c -> bool
+end
 
 val widgetsToDetach : (c, unit) Hashtbl.t
 val detachNow : c -> unit

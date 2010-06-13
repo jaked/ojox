@@ -19,22 +19,6 @@
 
 open Ocamljs.Inline
 
-class type ['a] iterator_ =
-object
-  method hasNext : bool
-  method next : 'a
-  method remove : unit
-end
-
-class type ['a] hasWidgets_ =
-object
-  method add : 'a -> unit
-  method clear : unit
-  method iterator : 'a iterator_
-  method list : 'a list
-  method remove : 'a -> bool
-end
-
 (* stuff from RootPanel to avoid circular reference *)
 let widgetsToDetach = Hashtbl.create 17
 
@@ -104,11 +88,8 @@ object (self : 'self)
          and remove it if necessary. *)
       if isInDetachList (self :> c)
       then detachNow (self :> c)
-    end else begin
-      match parent#instanceof_hasWidgets with
-        | Some hasWidgets -> ignore (hasWidgets#remove (self :> c))
-        | None -> failwith "This widget's parent does not implement HasWidgets"
     end
+    else ignore (parent#remove (self :> c))
 
   method setLayoutData : 'a. 'a -> unit = fun layoutData -> failwith "unimplemented"
 
@@ -238,8 +219,21 @@ object (self : 'self)
       end
     end
 
-  method instanceof_hasWidgets : c hasWidgets_ option = None
+  method remove : c -> bool = fun _ -> failwith "This widget's parent does not implement HasWidgets"
 end
 
-class type iterator = object inherit [c] iterator_ end
-class type hasWidgets = object inherit [c] hasWidgets_ end
+class type iterator =
+object
+  method hasNext : bool
+  method next : c
+  method remove : unit
+end
+
+class type hasWidgets =
+object
+  method add : #c -> unit
+  method clear : unit
+  method iterator : iterator
+  method list : c list
+  method remove : c -> bool
+end

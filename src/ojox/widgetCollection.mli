@@ -43,7 +43,7 @@ object
      
      @param w the widget to be added
    *)
-  method add : Widget.c -> unit
+  method add : #Widget.c -> unit
 
   (**
      Determines whether a given widget is contained in this collection.
