@@ -1,4 +1,4 @@
-DIRS=ojox
+DIRS=hello
 
 all:
 	for dir in $(DIRS); do \
