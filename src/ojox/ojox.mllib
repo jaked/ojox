@@ -3,8 +3,10 @@ AnchorElement
 AreaElement
 AttachDetachException
 BaseElement
+BlurEvent
 BRElement
 ButtonElement
+ClickEvent
 ComplexPanel
 DivElement
 DListElement
@@ -24,6 +26,8 @@ DOMTypes_
 Element
 Event
 FieldSetElement
+FocusEvent
+FocusWidget
 FormElement
 FrameElement
 FrameSetElement
@@ -34,6 +38,12 @@ IFrameElement
 ImageElement
 JavaScriptObject
 JavaString
+KeyCodeEvent
+KeyCodes
+KeyDownEvent
+KeyEvent
+KeyPressEvent
+KeyUpEvent
 LabelElement
 LegendElement
 LIElement
@@ -41,6 +51,13 @@ LinkElement
 MapElement
 MetaElement
 ModElement
+MouseDownEvent
+MouseEvent
+MouseMoveEvent
+MouseOutEvent
+MouseOverEvent
+MouseUpEvent
+MouseWheelEvent
 NativeEvent
 NativePreviewEvent
 Node
