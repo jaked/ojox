@@ -17,16 +17,16 @@
  * the License.
  *)
 
-class ['a] tag =
+class [+'a] tag =
 object
 end
 
 class virtual c =
-object (self : 'self)
+object (self)
   val mutable dead = false
   val mutable source = (None : < > option)
 
-  method virtual getAssociatedType : 'self tag
+  method virtual getAssociatedType : c tag
 
   method getSource : 'a. (< .. > as 'a) =
     self#assertLive;

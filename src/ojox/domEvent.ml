@@ -30,7 +30,7 @@ end
 
 let registered = PrivateMap.make ()
 
-class ['a] tag (eventName : string) (flyweight : 'a) =
+class [+'a] tag (eventName : string) (flyweight : 'a) =
 object (self)
   inherit ['a] OjoxEvent.tag
 
@@ -41,13 +41,11 @@ object (self)
 end
 
 class virtual c =
-object (self : 'self)
+object (self)
   inherit OjoxEvent.c
 
   val mutable nativeEvent = (<< null >> : nativeEvent)
   val mutable relativeElem = (<< null >> : element)
-
-  method virtual getAssociatedType_dom : 'self tag
 
   method private nativeEvent = nativeEvent
   method private relativeElem = relativeElem

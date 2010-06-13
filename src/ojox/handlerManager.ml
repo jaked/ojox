@@ -40,7 +40,7 @@ object (self)
 
   method fireEvent : 'a. (#OjoxEvent.c as 'a) -> bool -> unit = fun event isReverseOrder ->
     let tag = event#getAssociatedType in
-    let l = self#get tag in
+    let l = (Obj.magic self#get tag : _ handler list) in
     let l = if isReverseOrder then l else List.rev l in
     List.iter (fun h -> h event) l
 

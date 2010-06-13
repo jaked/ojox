@@ -40,7 +40,7 @@ open DOMTypes
    @param flyweight the instance that will be used as a flyweight to wrap a
             native event
  *)
-class ['a] tag : string -> 'a ->
+class [+'a] tag : string -> 'a ->
 object
   inherit ['a] OjoxEvent.tag
 
@@ -58,8 +58,6 @@ end
 class virtual c :
 object ('self)
   inherit OjoxEvent.c
-
-  method virtual getAssociatedType_dom : 'self tag
 
   method getNativeEvent : nativeEvent
 
