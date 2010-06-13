@@ -1,2 +1,2 @@
-<*.ml> : syntax_camlp4o,pkg_jslib.inline,pkg_ocamljs,pkg_javascript
+<*.ml> : syntax_camlp4o,pkg_jslib.inline,pkg_ocamljs
 

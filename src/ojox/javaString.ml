@@ -17,9 +17,12 @@
  * the License.
  *)
 
+open Ocamljs.Inline
+
 let charAt s index = failwith "unimplemented"
 let contains s1 s2 = failwith "unimplemented"
 let equalsIgnoreCase s1 s2 = failwith "unimplemented"
+let fromCharCode ch = << String.fromCharCode ch >>
 let indexOf s ?startIndex str = failwith "unimplemented"
 let indexOf_char s ?startIndex str = failwith "unimplemented"
 let length s = failwith "unimplemented"

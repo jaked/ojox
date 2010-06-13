@@ -46,8 +46,7 @@ object (self)
   method isEnabled = not (DOM.getElementPropertyBoolean self#getElement "disabled")
 
   method setAccessKey (key : char) =
-    (* XXX put char -> string conversion somewhere *)
-    DOM.setElementProperty self#getElement "accessKey" (Javascript.Js_string.fromCharCode (Obj.magic key))
+    DOM.setElementProperty self#getElement "accessKey" (JavaString.fromCharCode key)
 
   method setEnabled enabled = DOM.setElementPropertyBoolean self#getElement "disabled" (not enabled)
 
