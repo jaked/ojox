@@ -72,11 +72,8 @@ let detachWidgets () =
     | Some e -> raise e
 
 let hookWindowClosing () =
-  ()
   (* Catch the window closing event. *)
-  (* XXX
-  Window.addCloseHandler (fun _ -> detachWidgets ())
-  *)
+  let _ = Window.addCloseHandler (fun _ -> detachWidgets ()) in ()
 
 let isElementChildOfWidget element =
   (* Walk up the DOM hierarchy, looking for any widget with an event listener

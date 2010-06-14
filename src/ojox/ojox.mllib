@@ -9,6 +9,7 @@ Button
 ButtonBase
 ButtonElement
 ClickEvent
+CloseEvent
 ComplexPanel
 DivElement
 DListElement
@@ -98,3 +99,5 @@ UListElement
 Widget
 WidgetCollection
 Window
+WindowImpl
+

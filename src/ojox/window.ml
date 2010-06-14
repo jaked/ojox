@@ -19,4 +19,40 @@
 
 open Ocamljs.Inline
 
+open HandlerManager
+
+class c =
+object
+end
+
+class windowHandlers =
+object (self)
+  inherit HandlerManager.c (new c)
+
+  method addCloseHandler : c handler -> handlerRegistration = fun handler -> self#addHandler CloseEvent.getType handler
+end
+
 let alert msg = <:stmt< $$wnd.alert($msg$); >>
+
+let closeHandlersInitialized = ref false
+
+let handlers = new windowHandlers
+
+let getHandlers () = handlers
+
+let onClosed () =
+  if !closeHandlersInitialized
+  then CloseEvent.fire (getHandlers ()) (new c)
+
+let onClosing () = () (* XXX *)
+
+let maybeInitializeCloseHandlers () =
+  WindowImpl.onClosing := onClosing;
+  WindowImpl.onClosed := onClosed;
+  WindowImpl.initWindowCloseHandler ()
+
+let addHandler tag handler = (getHandlers ())#addHandler tag handler
+
+let addCloseHandler handler =
+  maybeInitializeCloseHandlers ();
+  addHandler CloseEvent.getType handler

@@ -1,7 +1,7 @@
 (*
  * This file is part of ojox, a library for web browser programming
  * Copyright (C) 2009 Jacob Donham
- * Original file (user/src/com/google/gwt/user/client/Window.java
+ * Original file (user/src/com/google/gwt/user/client/impl/WindowImpl.java
  * in the GWT source distribution) is Copyright 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
@@ -17,29 +17,17 @@
  * the License.
  *)
 
-open HandlerManager
-
 (**
-   This class provides access to the browser window's methods, properties, and
-   events.
+   Native implementation associated with
+   {@link com.google.gwt.user.client.Window}.
 *)
-class c :
-object
-end
+val getHash : unit -> string
+val getQueryString : unit -> string
+val initWindowCloseHandler : unit -> unit
+val initWindowResizeHandler : unit -> unit
+val initWindowScrollHandler : unit -> unit
 
-(**
-   Displays a message in a modal dialog box.
-   
-  @param msg the message to be displayed.
-*)
-val alert : string -> unit
-
-(**
-   Adds a {@link CloseEvent} handler.
-   
-   @param handler the handler
-   @return returns the handler registration
-*)
-val addCloseHandler : 'a CloseEvent.c handler -> handlerRegistration
-
-
+val onClosing : (unit -> unit) ref
+val onClosed : (unit -> unit) ref
+val onResize : (unit -> unit) ref
+val onScroll : (unit -> unit) ref
