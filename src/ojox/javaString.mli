@@ -24,7 +24,6 @@ val contains : string -> string -> bool
 val equalsIgnoreCase : string -> string -> bool
 val fromCharCode : char -> string
 val indexOf : string -> ?startIndex:int -> string -> int
-val indexOf_char : string -> ?startIndex:int -> char -> int
 val length : string -> int
 val substring : string -> ?endIndex:int -> int -> string
 val toLowerCase : string -> string

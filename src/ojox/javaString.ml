@@ -19,13 +19,36 @@
 
 open Ocamljs.Inline
 
-let charAt s index = failwith "unimplemented"
-let contains s1 s2 = failwith "unimplemented"
-let equalsIgnoreCase s1 s2 = failwith "unimplemented"
+let charAt s index = << $s$.charCodeAt($index$) >>
+
+let equalsIgnoreCase s1 s2 = <:rstmt<
+  if ($s2$ == null)
+    return false;
+  return ($s1$ == $s2$) || ($s1$.toLowerCase() == $s2$.toLowerCase());
+>>
+
 let fromCharCode ch = << String.fromCharCode ch >>
-let indexOf s ?startIndex str = failwith "unimplemented"
-let indexOf_char s ?startIndex str = failwith "unimplemented"
-let length s = failwith "unimplemented"
-let substring s ?endIndex startIndex = failwith "unimplemented"
-let toLowerCase s = failwith "unimplemented"
-let trim s = failwith "unimplemented"
+
+let indexOf s ?startIndex str = << $s$.indexOf($str$, $Ocamljs.nullable_of_option startIndex$) >>
+
+let contains s1 s2 = indexOf s1 s2 != -1
+
+let length s = << $s$.length >>
+
+let substring s ?endIndex beginIndex =
+  let len =
+    match endIndex with
+      | None -> length s - beginIndex
+      | Some endIndex -> endIndex - beginIndex in
+  << $s$.substr($beginIndex$, $len$) >>
+
+let toLowerCase s = << $s$.toLowerCase() >>
+
+let trim s = <:rstmt<
+  if ($s$.length == 0 || ($s$[0] > '\u0020' && $s$[$s$.length-1] > '\u0020')) {
+    return $s$;
+  }
+  var r1 = $s$.replace(/^(\s*)/, '');
+  var r2 = r1.replace(/\s*$/, '');
+  return r2;
+>>

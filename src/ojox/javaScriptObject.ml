@@ -29,6 +29,6 @@ let cast = Obj.magic
 
 let equals a b = << $a$ === $b$ >>
 
-let hashCode o = failwith "unimplemented" (* XXX Impl *)
+let hashCode = Impl.getHashCode
 
 let toString o = << $o$.toString ? $o$.toString() : "[JavaScriptObject]" >>

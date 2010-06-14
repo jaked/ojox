@@ -63,7 +63,7 @@ let getStylePrimaryName elem =
   (* The primary style name is always the first token of the full CSS class
      name. There can be no leading whitespace in the class name, so it's not
      necessary to trim() it. *)
-  let spaceIdx = JavaString.indexOf_char fullClassName ' ' in
+  let spaceIdx = JavaString.indexOf fullClassName " " in
   if spaceIdx >= 0
   then JavaString.substring ~endIndex:spaceIdx fullClassName 0
   else fullClassName
